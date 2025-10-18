@@ -75,11 +75,29 @@
             border-radius: 8px;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            transition: left 0.3s ease;
+            z-index: -1;
         }
         
         .button:hover {
-            background-color: #000000;
             color: #ffffff;
+        }
+        
+        .button:hover::before {
+            left: 0;
         }
         
         /* 头部样式 */
@@ -120,13 +138,29 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e67e23;
+            transition: width 0.3s ease;
         }
         
         .nav-menu a:hover {
             color: #e67e23;
         }
         
-        /* 英雄区域样式 - 新增轮播图样式 */
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        /* 英雄区域样式 - 轮播图样式 */
         .hero-section {
             padding: 100px 0;
             position: relative;
@@ -178,6 +212,19 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             position: relative;
             z-index: 1;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* 关于我们样式 */
@@ -261,15 +308,44 @@
             padding: 20px;
         }
         
-        /* 核心成员样式 */
+        /* 核心成员样式 - 按部门重新组织 */
         .team-section {
             padding: 80px 0;
         }
         
+        .department-section {
+            margin-bottom: 60px;
+        }
+        
+        .department-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e67e23;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .department-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #e67e23;
+        }
+        
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        
+        .mb-8 {
+            margin-bottom: 40px;
         }
         
         .team-card {
@@ -278,15 +354,16 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .team-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
         
         .team-image {
-            height: 250px;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -294,22 +371,93 @@
         }
         
         .member-avatar {
-            width: 150px;
-            height: 150px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid #e67e23;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        /* 主席特殊样式 */
+        .president-card {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .president-avatar {
+            width: 150px;
+            height: 150px;
+            border: 5px solid #e67e23;
+        }
+        
+        /* 主席团团布局样式 */
+        .flex-team-container {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+        
+        .flex-president {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .flex-vice-presidents {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .president-name {
+            font-size: 1.4rem;
+            color: #e67e23;
+        }
+        
+        .president-position {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .president-description {
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        .team-card:hover .member-avatar {
+            transform: scale(1.05);
         }
         
         .team-info {
             padding: 20px;
         }
         
-        /* 联系我们样式 */
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .member-position {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .member-description {
+            font-size: 0.95rem;
+            color: #444;
+        }
+        
+        /* 联系我们样式 - 添加动画效果 */
         .contact-section {
             padding: 80px 0;
             background-color: #f8f8f8;
+            position: relative;
         }
         
         .contact-container {
@@ -337,6 +485,128 @@
         
         .contact-image img:hover {
             transform: scale(1.03);
+        }
+        
+        /* 社交二维码样式 */
+        .social-qrcode {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .qrcode-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .qrcode-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .qrcode-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .qrcode-text {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        /* 联系我们弹窗样式 */
+        .contact-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .contact-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: #e67e23;
+        }
+        
+        /* 页我们按钮动画按钮 */
+        .contact-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #e67e23;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: left 0.6s ease;
+        }
+        
+        .contact-button:hover::before {
+            left: 100%;
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(230, 126, 35, 0.4);
         }
         
         /* 页脚样式 */
@@ -373,6 +643,22 @@
                 height: auto;
                 padding: 60px 0;
             }
+            
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+            
+            .flex-team-container {
+                flex-direction: column;
+            }
+            
+            .flex-vice-presidents {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+            
+            .social-qrcode {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -385,12 +671,12 @@
                 <li><a href="#about">关于我们</a></li>
                 <li><a href="#plans">计划活动</a></li>
                 <li><a href="#team">核心成员</a></li>
-                <li><a href="#contact">联系我们</a></li>
+                <li><a href="#" id="contact-link">联系我们</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- 英雄区域 - 新增轮播图结构 -->
+    <!-- 英雄区域 - 轮播图结构 -->
     <section class="hero-section">
         <div class="slider">
             <div class="slide active" style="background-image: url('https://picsum.photos/id/20/1920/1080');">
@@ -410,18 +696,18 @@
             <div class="hero-content">
                 <h1 class="heading-xlarge">请支持二号内阁！</h1>
                 <p class="body-normal">Fortunate致力于打造一个更加开放、包容、创新的学生会组织，为每一位同学提供展示才华、实现梦想的舞台。</p>
-                <a href="#contact" class="button">联系我们</a>
+                <button class="button contact-button" id="hero-contact-btn">联系我们</button>
             </div>
         </div>
     </section>
 
-    <!-- 关于我们 - 修改"香港学子"为"学子" -->
+    <!-- 关于我们 -->
     <section id="about" class="about-section">
         <div class="container about-container">
             <div class="about-text">
                 <div class="rich-text-block">
                     <h2 class="heading-large">赋能学子，塑造未来</h2>
-                    <p><span class="highlight">Fortunate</span> 致力于通过为学子提供卓越服务来塑造未来。我们深谙当代学子面临的独特挑战与机遇，矢志支持他们的学业与个人成长。团队满怀热忱，致力于营造培育型环境，让学子在此茁壮成长、汲取知识、为成功未来做好准备。<span class="highlight">选择福运</span>，您将获得全程无忧的指导与支持。</p>
+                    <p><span class="highlight">Fortunate</span> 致力于通过为学子提供卓越服务来塑造未来。我们深谙当代代学子面临的独特挑战与机遇，矢志支持他们的学业与个人成长。团队满怀热忱，致力于营造培育型环境，让学子在此茁壮成长、汲取知识、为成功未来做好准备。<span class="highlight">选择福运</span>，您将获得全程全程无忧的指导与支持。</p>
                 </div>
             </div>
             <div class="about-image">
@@ -452,68 +738,198 @@
         </div>
     </section>
 
-    <!-- 核心成员 - 修改"财政"为"财政成员" -->
+    <!-- 核心成员 - 按部门重新组织 -->
     <section id="team" class="team-section">
         <div class="container">
             <div class="section-title">
                 <h2 class="heading-large">核心成员</h2>
                 <p class="body-normal">Work never stops</p>
             </div>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="https://picsum.photos/id/64/300/300" alt="越迪文 主席" class="member-avatar" title="越迪文 主席">
+            
+            <!-- 主席团 -->
+            <div class="department-section">
+                <h3 class="heading-medium department-title">主席团</h3>
+                
+                <!-- 主席团成员 - 主席和副会长在同一行 -->
+                <div class="flex-team-container">
+                    <div class="team-card president-card flex-president">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/64/300/300" alt="越迪文 主席" class="member-avatar president-avatar" title="越迪文 主席">
+                        </div>
+                        <div class="team-info president-info">
+                            <h4 class="member-name president-name">越迪文</h4>
+                            <p class="member-position president-position">主席</p>
+                            <p class="member-description president-description">全面负责学生会工作，统筹各部门协调发展，代表学生会对外联络。</p>
+                        </div>
                     </div>
-                    <div class="team-info">
-                        <h3 class="heading-medium">越迪文 主席</h3>
-                        <p class="body-normal">全面负责学生会工作，统筹各部门协调发展，代表学生会对外联络。拥有丰富的组织管理经验，致力于为同学们服务。</p>
+                    
+                    <div class="flex-vice-presidents">
+                        <div class="team-card">
+                            <div class="team-image">
+                                <img src="https://picsum.photos/id/67/300/300" alt="沈子晴 外务副会长" class="member-avatar" title="沈子晴 外务副会长">
+                            </div>
+                            <div class="team-info">
+                                <h4 class="member-name">沈子晴</h4>
+                                <p class="member-position">外务副会长</p>
+                                <p class="member-description">负责对外部联络与合作，拓展学生会影响力。</p>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-image">
+                                <img src="https://picsum.photos/id/65/300/300" alt="黄俊朗 内务副会长" class="member-avatar" title="黄俊朗 内务副会长">
+                            </div>
+                            <div class="team-info">
+                                <h4 class="member-name">黄俊朗</h4>
+                                <p class="member-position">内务副会长</p>
+                                <p class="member-description">负责内部事务管理，协调证学生会日常运营顺畅。</p>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-image">
+                                <img src="https://picsum.photos/id/66/300/300" alt="张瑞谦 内务副会长" class="member-avatar" title="张瑞谦 内务副会长">
+                            </div>
+                            <div class="team-info">
+                                <h4 class="member-name">张瑞谦</h4>
+                                <p class="member-position">内务副会长</p>
+                                <p class="member-description">协助内务管理，负责成员培训与发展。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="https://picsum.photos/id/65/300/300" alt="郑熙雯 总务成员" class="member-avatar" title="郑熙雯 总务成员">
+            </div>
+            
+            <!-- 职能部门 -->
+            <div class="department-section">
+                <h3 class="heading-medium department-title">职能部门</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/68/300/300" alt="甄雅琳 文书" class="member-avatar" title="甄雅琳 文书">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">甄雅琳</h4>
+                            <p class="member-position">文书</p>
+                            <p class="member-description">负责会议记录、文件整理与管理工作。</p>
+                        </div>
                     </div>
-                    <div class="team-info">
-                        <h3 class="heading-medium">郑熙雯 总务成员</h3>
-                        <p class="body-normal">协助总务工作，负责会议安排和活动协调，细心严谨，确保各项工作有序推进，保障学生会日常运营顺畅。</p>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/69/300/300" alt="刘怛驊 财政成员" class="member-avatar" title="刘怛驊 财政成员">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">刘怛驊</h4>
+                            <p class="member-position">财政成员</p>
+                            <p class="member-description">负责预算编制与财务管理工作。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/70/300/300" alt="蔡静敏 财政成员" class="member-avatar" title="蔡静敏 财政成员">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">蔡静敏</h4>
+                            <p class="member-position">财政成员</p>
+                            <p class="member-description">协助财务管理，负责经费报销销与账目记录。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/71/300/300" alt="马浩元 康乐" class="member-avatar" title="马浩元 康乐">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">马浩元</h4>
+                            <p class="member-position">康乐</p>
+                            <p class="member-description">负责策划与组织各类文体活动。</p>
+                        </div>
                     </div>
                 </div>
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="https://picsum.photos/id/66/300/300" alt="蔡静铱 财政成员" class="member-avatar" title="蔡静铱 财政成员">
+            </div>
+            
+            <!-- 活动部门 -->
+            <div class="department-section">
+                <h3 class="heading-medium department-title">活动部门</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/72/300/300" alt="欧阳可津 康乐" class="member-avatar" title="欧阳可津 康乐">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">欧阳可津</h4>
+                            <p class="member-position">康乐</p>
+                            <p class="member-description">协助助活动执行与现场管理工作。</p>
+                        </div>
                     </div>
-                    <div class="team-info">
-                        <h3 class="heading-medium">蔡静铱 财政成员</h3>
-                        <p class="body-normal">负责学生会财务预算、经费管理和报销工作，秉持公正透明原则，确保每一笔资金都能合理运用到学生服务中。</p>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/73/300/300" alt="赵瀚霆 福利" class="member-avatar" title="赵瀚霆 福利">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">赵瀚霆</h4>
+                            <p class="member-position">福利</p>
+                            <p class="member-description">负责学生福利项目策划与实施。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/74/300/300" alt="何志毅 宣传" class="member-avatar" title="何志毅 宣传">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">何志毅</h4>
+                            <p class="member-position">宣传</p>
+                            <p class="member-description">负责活动宣传与新媒体运营工作。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/75/300/300" alt="鍾嘉彤 宣传" class="member-avatar" title="鍾嘉彤 宣传">
+                        </div>
+                        <div class="team-info">
+                            <h4 class="member-name">鍾嘉彤</h4>
+                            <p class="member-position">宣传</p>
+                            <p class="member-description">负责视觉设计与品牌物料制作。</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 联系我们 -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-title">
-                <h2 class="heading-large">联系我们</h2>
-                <p class="body-normal">赶快关注我们的社交账号，了解最新动态。</p>
+    <!-- 联系我们弹窗 -->
+    <div class="contact-modal" id="contact-modal">
+        <span class="modal-close" id="modal-close">&times;</span>
+        <div class="modal-content">
+            <h2 class="heading-large">联系我们</h2>
+            <p class="body-normal">感谢您的关注！如有任何何问题或建议议，欢迎通过系我们。</p>
+            
+            <div class="contact-details">
+                <h3 class="heading-small">联系方式</h3>
+                <p class="body-normal">地点：高座4楼</p>
+                <p class="body-normal">电邮：fortunate@example.edu.hk</p>
+                <p class="body-normal">联系电话：+852 XXXX XXXX</p>
             </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3 class="heading-medium">联系方式</h3>
-                    <p class="body-normal">地点：高座4楼</p>
-                    <p class="body-normal">电邮：fortunate@example.edu.hk</p>
-                    <p class="body-normal">联系电话：+852 XXXX XXXX</p>
-                    <div style="margin-top: 30px;">
-                        <a href="#" class="button">关注我们</a>
+            
+            <div class="social-qrcode">
+                <div class="qrcode-item">
+                    <div class="qrcode-image">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/ba4d7f10aa4e4151868ff435e394b935~tplv-a9rns2rl98-image.image?rcl=2025101900211322D2DBEE1461F415E872&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1763396483&x-signature=agebrdiHSuUUFX14XsWIT0p1IJU%3D" alt="微信二维码">
                     </div>
+                    <p class="qrcode-text">微信公众号</p>
                 </div>
-                <div class="contact-image">
-                    <img src="https://picsum.photos/id/42/800/600" alt="学生会办公室" title="学生会办公室地址">
+                <div class="qrcode-item">
+                    <div class="qrcode-image">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/ba4d7f10aa4e4151868ff435e394b935~tplv-a9rns2rl98-image.image?rcl=2025101900211322D2DBEE1461F415E872&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1763396483&x-signature=agebrdiHSuUUFX14XsWIT0p1IJU%3D" alt="Instagram二维码">
+                    </div>
+                    <p class="qrcode-text">Instagram</p>
+                </div>
+                <div class="qrcode-item">
+                    <div class="qrcode-image">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/ba4d7f10aa4e4151868ff435e394b935~tplv-a9rns2rl98-image.image?rcl=2025101900211322D2DBEE1461F415E872&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1763396483&x-signature=agebrdiHSuUUFX14XsWIT0p1IJU%3D" alt="Facebook二维码">
+                    </div>
+                    <p class="qrcode-text">Facebook</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- 页脚 -->
     <footer>
@@ -523,14 +939,13 @@
         </div>
     </footer>
 
-    <!-- 轮播图动态切换脚本 -->
+    <!-- JavaScript -->
     <script>
-        // 获取轮播图元素
+        // 轮播图动态切换脚本
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
         const slideInterval = 5000; // 切换间隔时间（毫秒）
         
-        // 切换轮播图函数
         function nextSlide() {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
@@ -539,6 +954,73 @@
         
         // 设置自动轮播
         setInterval(nextSlide, slideInterval);
+        
+        // 联系我们弹窗脚本
+        const contactModal = document.getElementById('contact-modal');
+        const contactLink = document.getElementById('contact-link');
+        const heroContactBtn = document.getElementById('hero-contact-btn');
+        const modalClose = document.getElementById('modal-close');
+        
+        // 打开弹窗
+        function openModal() {
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        // 关闭弹窗
+        function closeModal() {
+            contactModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // 恢复背景滚动
+        }
+        
+        // 绑定事件
+        contactLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+        
+        heroContactBtn.addEventListener('click', openModal);
+        modalClose.addEventListener('click', closeModal);
+        
+        // 点击弹窗外部关闭
+        contactModal.addEventListener('click', function(e) {
+            if (e.target === contactModal) {
+                closeModal();
+            }
+        });
+        
+        // 键盘ESC关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+        
+        // 滚动动画效果
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.team-card, .about-text, .about-image, .contact-info, .contact-image');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // 初始化元素样式
+        document.querySelectorAll('.team-card, .about-text, .about-image, .contact-info, .contact-image').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // 页面加载和滚动时触发动画
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
     </script>
 </body>
 </html>
