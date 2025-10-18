@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href=""/>
+    <title>赋能学子，塑造未来 | Fortunate 学生会</title>
+    <meta http-equiv="Content-Language" content="zh-CN"/>
+    <meta name="keywords" content="学生会竞选,学生会,学生组织,学生福利,校园活动,香港校园"/>
+    <meta name="description" content="Fortunate致力于打造一个更加开放、包容、创新的学生会组织，为每一位同学提供展示才华、实现梦想的舞台。"/>
+    <link rel="stylesheet" href="style.css"/>
+    
+    <style>
+        /* 互动按钮样式 - 移到联系我们右边 */
+        .mystery-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1002; /* 确保在粒子效果之上 */
+            padding: 12px 20px;
+            background-color: #e67e23;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.1s ease; /* 加快过渡效果 */
+            animation: breathe 1.5s infinite; /* 加快呼吸动画 */
+        }
+        
+        .mystery-button:hover {
+            background-color: #d35400;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 点击时的缩放效果 */
+        .mystery-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 呼吸计数动画效果 */
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                opacity: 0.7;
+            }
+        }
+        
+        /* 点击计数显示 - 大数字样式 */
+        .click-count {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1002;
+            font-size: 150px;
+            font-weight: bold;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 20px 40px;
+            border-radius: 50%;
+        }
+        
+        .click-count.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        
+        /* 点击计数动画效果 */
+        @keyframes numberChange {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        .click-count.animate {
+            animation: numberChange 0.5s ease-out forwards;
+        }
+        
+        /* 梦幻特效 - 阈值达成时显示 */
+        .dream-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1003;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .dream-effect.active {
+            opacity: 1;
+        }
+        
+        /* 梦幻特效中的数字 */
+        .dream-number {
+            position: absolute;
+            font-size: 100px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 156, 0, 0.8);
+            opacity: 0;
+            animation: floatNumber 4s ease-in-out forwards;
+        }
+        
+        @keyframes floatNumber {
+            0% {
+                transform: translateY(50px) scale(0.8);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0) scale(1.3);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 156, 0, 1);
+            }
+            40% {
+                transform: translateY(0) scale(1);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            80% {
+                opacity: 0.8;
+                transform: translateY(-50px) scale(1);
+            }
+            100% {
+                transform: translateY(-100px) scale(0.8);
+                opacity: 0;
+            }
+        }
+        
+        /* 梦幻特效中的光斑 */
+        .dream-light {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            animation: pulseLight 3s ease-in-out forwards;
+        }
+        
+        @keyframes pulseLight {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+        
+        /* 梦幻特效中的星形 */
+        .dream-star {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            opacity: 0;
+            animation: twinkleStar 2s ease-in-out forwards;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes twinkleStar {
+            0% {
+                transform: translateY(10px) scale(0.5) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(0) scale(1.3) rotate(15deg);
+                opacity: 1;
+                text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 156, 0, 0.8);
+            }
+            100% {
+                transform: translateY(-20px) scale(0.8) rotate(30deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 梦幻特效中的粒子 */
+        .dream-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle 3s ease-in-out forwards;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+        
+        /* 梦幻特效中的光尾 */
+        .dream-trail {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0));
+            opacity: 0;
+            animation: trailAnimation 1.5s ease-in-out forwards;
+            transform-origin: top center;
+        }
+        
+        @keyframes trailAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(var(--angle));
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(50px) rotate(var(--angle));
+            }
+        }
+        
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Mulish', sans-serif;
+            color: #000000;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* 添加平滑滚动 */
+        }
+        
+        /* 布局样式 */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 标题样式 */
+        .heading-xlarge {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .heading-large {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .heading-medium {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .heading-small {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        /* 文本样式 */
+        .body-normal {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 按钮样式 */
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: transparent;
+            border: 2px solid #000000;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: #FFFFFF;
+            color: #000000;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #e67e23;
+        }
+        
+        /* 英雄区域样式 - 新增轮播图样式 */
+        .hero-section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            height: 600px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            background-color: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 关于我们样式 */
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.03);
+        }
+        
+        .highlight {
+            color: #e67e23;
+            font-weight: bold;
+        }
+        
+        /* 计划活动样式 */
+        .plans-section {
+            padding: 80px 0;
+            background-color: #f8f8f8;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .plan-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .plan-image {
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .plan-content {
+            padding: 20px;
+        }
+        
+        /* 核心成员样式 */
+        .team-section {
+            padding: 80px 0;
+        }
+        
+        .department {
+            margin-bottom: 60px;
+        }
+        
+        .department-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e67e23;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f39c12;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-image {
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e67e23;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        /* 联系我们样式 */
+        .contact-section {
+            padding: 80px 0;
+            background-color: #f8f8f8;
+        }
+        
+        /* 社交媒体二维码样式 */
+        .social-qrcodes {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .qrcode-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .qrcode-item:hover {
+            transform: translateY(-5px) scale(1.03);
+        }
+        
+        .qrcode-image {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .qrcode-item:hover .qrcode-image {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .qrcode-text {
+            font-weight: 500;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .qrcode-item:hover .qrcode-text {
+            color: #e67e23;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-image img:hover {
+            transform: scale(1.03);
+        }
+        
+        /* 支持我们区域样式 - 美化设计 */
+        .support-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+        
+        .support-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e67e23;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .support-text {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .support-button {
+            padding: 10px 20px;
+            background-color: transparent;
+            color: #e67e23;
+            border: 2px solid #e67e23;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .support-button:hover {
+            background-color: #e67e23;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        /* 灵动的弹跳动画效果 */
+        @keyframes bounce {
+            0% {
+                transform: scale(1);
+            }
+            20% {
+                transform: scale(1.15) translateY(-5px);
+            }
+            40% {
+                transform: scale(0.95) translateY(3px);
+            }
+            60% {
+                transform: scale(1.1) translateY(-3px);
+            }
+            80% {
+                transform: scale(0.98) translateY(2px);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .footer-bounce {
+            animation: bounce 0.6s ease-out;
+        }
+        
+        /* 更迅速的弹跳动画效果 */
+        @keyframes quick-bounce {
+            0% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scale(1.2) translateY(-8px);
+            }
+            60% {
+                transform: scale(0.9) translateY(4px);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .quick-bounce {
+            animation: quick-bounce 0.3s ease-out;
+        }
+        
+        /* 极速弹跳动画 - 用于底部按钮 */
+        @keyframes ultra-bounce {
+            0% {
+                transform: scale(1);
+            }
+            40% {
+                transform: scale(1.3) translateY(-10px);
+            }
+            70% {
+                transform: scale(0.85) translateY(5px);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .ultra-bounce {
+            animation: ultra-bounce 0.2s ease-out;
+        }
+        
+        /* 数字放大动画 */
+        @keyframes number-scale {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.8);
+                text-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 60px currentColor;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .number-scale {
+            animation: number-scale 0.5s ease-in-out;
+        }
+        
+        /* 数字光环效果 */
+        @keyframes number-glow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px currentColor;
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+        }
+        
+        .number-glow {
+            animation: number-glow 1s ease-in-out infinite;
+        }
+        
+        /* 毛玻璃小球返回顶部按钮样式 */
+        .back-to-top-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1002;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            /* 毛玻璃效果 */
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-to-top-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .back-to-top-button.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .about-container, .contact-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .heading-xlarge {
+                font-size: 2.2rem;
+            }
+            
+            .heading-large {
+                font-size: 2rem;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-section {
+                height: auto;
+                padding: 60px 0;
+            }
+            
+            .support-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 梦幻特效容器 -->
+    <div class="dream-effect" id="dreamEffect"></div>
+    
+    <!-- 点击计数显示 -->
+    <div class="click-count" id="clickCount">点击次数: 0</div>
+    
+    <!-- 互动按钮 -->
+    <button class="mystery-button" id="mysteryButton">快来点我吧！</button>
+    
+    <!-- 网站头部 -->
+    <header>
+        <div class="container header-container">
+            <a href="/" class="header-logo">Fortunate 你的想法交由我们实现</a>
+            <ul class="nav-menu">
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#benefits">福利介绍</a></li>
+                <li><a href="#plans">计划活动</a></li>
+                <li><a href="#team">核心成员</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 英雄区域 - 新增轮播图结构 -->
+    <section class="hero-section">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('https://picsum.photos/id/20/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://picsum.photos/id/1071/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://picsum.photos/id/42/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://picsum.photos/id/60/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="heading-xlarge">请支持二号内阁！</h1>
+                <p class="body-normal">Fortunate致力于打造一个更加开放、包容、创新的学生会组织，为每一位同学提供展示才华、实现梦想的舞台。</p>
+                <a href="#footer" class="button contact-button">联系我们</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 - 修改"香港学子"为"学子" -->
+    <section id="about" class="about-section">
+        <div class="container about-container">
+            <div class="about-text">
+                <div class="rich-text-block">
+                    <h2 class="heading-large">赋能学子，塑造未来</h2>
+                    <p><span class="highlight">Fortunate</span> 致力于通过为学子提供卓越服务来塑造未来。我们深谙当代学子面临的独特挑战与机遇，矢志支持他们的学业与个人成长。团队满怀热忱，致力于营造培育型环境，让学子在此茁壮成长、汲取知识、为成功未来做好准备。<span class="highlight">选择福运</span>，您将获得全程无忧的指导与支持。</p>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://picsum.photos/id/1071/800/600" alt="学生会活动现场" title="学生会组织的校园活动">
+            </div>
+        </div>
+    </section>
+
+    <!-- 福利介绍 -->
+    <section id="benefits" class="benefits-section" style="padding: 80px 0; background-color: #fff8f0;">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="heading-large">福利介绍</h2>
+                <p class="body-normal">我们为同学们准备了丰富多彩的福利活动，敬请期待！</p>
+            </div>
+            <div class="benefits-grid" style="display: flex; flex-direction: column; gap: 30px;">
+                <!-- 福利项目4 -->
+                <div class="benefit-item" style="display: flex; gap: 30px; align-items: center; background-color: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+                    <div class="benefit-image" style="flex: 1; height: 250px; overflow: hidden;">
+                        <img src="https://p3-doubao-search-sign.byteimg.com/labis/1a2f5fec393f090e62cb4783d599b6be~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1765991753&x-signature=i892HXZU8HMhZlswIOxehDIZeYk%3D" alt="学生专属优惠" title="学生专属优惠" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    </div>
+                    <div class="benefit-content" style="flex: 2; padding: 20px;">
+                        <h3 class="heading-medium">学生专属优惠</h3>
+                        <p class="body-normal">与多家校外商家合作，为同学们提供专属优惠折扣，涵盖餐饮、购物、娱乐等多个方面，让校园生活更加丰富多彩。</p>
+                    </div>
+                </div>
+                
+                <!-- 预留的优惠活动图片位置 -->
+                <div class="discount-images" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 40px;">
+                    <div class="discount-image-placeholder" style="height: 200px; background-color: #f5f5f5; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; transition: all 0.3s ease;">
+                        <div style="text-align: center;">
+                            <i class="fa fa-image" style="font-size: 30px; color: #999; margin-bottom: 10px;"></i>
+                            <p style="color: #666;">优惠活动图片1</p>
+                        </div>
+                    </div>
+                    <div class="discount-image-placeholder" style="height: 200px; background-color: #f5f5f5; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; transition: all 0.3s ease;">
+                        <div style="text-align: center;">
+                            <i class="fa fa-image" style="font-size: 30px; color: #999; margin-bottom: 10px;"></i>
+                            <p style="color: #666;">优惠活动图片2</p>
+                        </div>
+                    </div>
+                    <div class="discount-image-placeholder" style="height: 200px; background-color: #f5f5f5; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; transition: all 0.3s ease;">
+                        <div style="text-align: center;">
+                            <i class="fa fa-image" style="font-size: 30px; color: #999; margin-bottom: 10px;"></i>
+                            <p style="color: #666;">优惠活动图片3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 计划活动 -->
+    <section id="plans" class="plans-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="heading-large">计划活动</h2>
+                <p class="body-normal">更多精彩活动，敬请期待！</p>
+            </div>
+            <div class="plans-grid">
+                <!-- 计划活动留空，仅保留一个占位卡片 -->
+                <div class="plan-card">
+                    <div class="plan-image">
+                        活动筹备中
+                    </div>
+                    <div class="plan-content">
+                        <h3 class="heading-medium">即将公布</h3>
+                        <p class="body-normal">我们正在积极筹备多项精彩活动，详情将陆续公布，敬请关注。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心成员 - 按部门分类显示 -->
+    <section id="team" class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="heading-large">核心成员</h2>
+                <p class="body-normal">Work never stops</p>
+            </div>
+            
+            <!-- 主席 -->
+            <div class="department">
+                <h3 class="department-title">主席</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/64/300/300" alt="越迪文 主席" class="member-avatar" title="越迪文 主席">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">越迪文 主席</h3>
+                            <p class="body-normal">全面负责学生会工作，统筹各部门协调发展，代表学生会对外联络。拥有丰富的组织管理经验，致力于为同学们服务。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 副会长 -->
+            <div class="department">
+                <h3 class="department-title">副会长</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/91/300/300" alt="沈子晴 外务副会长" class="member-avatar" title="沈子晴 外务副会长">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">沈子晴 外务副会长</h3>
+                            <p class="body-normal">负责学生会对外联络工作，拓展校企合作，提升学生会影响力和资源网络。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/92/300/300" alt="黄俊朗 内务副会长" class="member-avatar" title="黄俊朗 内务副会长">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">黄俊朗 内务副会长</h3>
+                            <p class="body-normal">负责学生会内部管理，协调各部门工作，确保学生会高效运作。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/93/300/300" alt="张瑞谦 内务副会长" class="member-avatar" title="张瑞谦 内务副会长">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">张瑞谦 内务副会长</h3>
+                            <p class="body-normal">协助内务管理工作，负责会员服务和内部沟通协调。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 文书部 -->
+            <div class="department">
+                <h3 class="department-title">文书部</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/94/300/300" alt="甄雅琳 文书" class="member-avatar" title="甄雅琳 文书">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">甄雅琳 文书</h3>
+                            <p class="body-normal">负责学生会文件起草、会议记录和档案管理工作，确保信息准确传达。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 财务部 -->
+            <div class="department">
+                <h3 class="department-title">财务部</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/95/300/300" alt="刘怛驊 财政" class="member-avatar" title="刘怛驊 财政">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">刘怛驊 财政</h3>
+                            <p class="body-normal">负责学生会财务预算、经费管理和报销工作，确保财务透明合规。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/66/300/300" alt="蔡静铱 财政成员" class="member-avatar" title="蔡静铱 财政成员">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">蔡静铱 财政成员</h3>
+                            <p class="body-normal">协助财务管理工作，负责账目记录和财务报表编制。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 康乐部 -->
+            <div class="department">
+                <h3 class="department-title">康乐部</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/96/300/300" alt="马浩元 康乐" class="member-avatar" title="马浩元 康乐">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">马浩元 康乐</h3>
+                            <p class="body-normal">负责策划和组织各类文体活动，丰富同学们的校园生活。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/5d91a15743c94d60839a23ed8d307fac~tplv-a9rns2rl98-image.image?rcl=202510190112291973DBDAD6C13051F1CE&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1763399573&x-signature=qjBqcdUOWKwM5cgoV6ZIoj2pMqQ%3D" alt="欧阳可津 康乐" class="member-avatar" title="欧阳可津 康乐">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">欧阳可津 康乐</h3>
+                            <p class="body-normal">协助组织各类文体活动，负责活动现场协调和执行。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 福利部 -->
+            <div class="department">
+                <h3 class="department-title">福利部</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/98/300/300" alt="赵瀚霆 福利" class="member-avatar" title="赵瀚霆 福利">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">赵瀚霆 福利</h3>
+                            <p class="body-normal">负责策划和实施各类学生福利项目，提升同学们的校园体验。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 宣传部 -->
+            <div class="department">
+                <h3 class="department-title">宣传部</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/99/300/300" alt="何志毅 宣传" class="member-avatar" title="何志毅 宣传">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">何志毅 宣传</h3>
+                            <p class="body-normal">负责学生会形象设计和宣传推广工作，提升学生会知名度和影响力。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/100/300/300" alt="鍾嘉彤 宣传" class="member-avatar" title="鍾嘉彤 宣传">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">鍾嘉彤 宣传</h3>
+                            <p class="body-normal">协助宣传工作，负责社交媒体运营和内容创作。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 总务部 -->
+            <div class="department">
+                <h3 class="department-title">总务部</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/101/300/300" alt="叶梓茵 总务" class="member-avatar" title="叶梓茵 总务">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">叶梓茵 总务</h3>
+                            <p class="body-normal">负责学生会物资管理和活动场地安排，保障各项活动顺利进行。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/65/300/300" alt="郑熙雯 总务成员" class="member-avatar" title="郑熙雯 总务成员">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">郑熙雯 总务成员</h3>
+                            <p class="body-normal">协助总务工作，负责会议安排和活动协调，细心严谨，确保各项工作有序推进。</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/102/300/300" alt="骆思颖 总务" class="member-avatar" title="骆思颖 总务">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">骆思颖 总务</h3>
+                            <p class="body-normal">协助总务工作，负责学生会日常事务管理和后勤保障。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学术部 -->
+            <div class="department">
+                <h3 class="department-title">学术部</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://picsum.photos/id/103/300/300" alt="黄靖仪 学术" class="member-avatar" title="黄靖仪 学术">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="heading-medium">黄靖仪 学术</h3>
+                            <p class="body-normal">负责策划和组织各类学术活动，促进学术交流和知识分享。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="heading-large">联系我们</h2>
+                <p class="body-normal">赶快关注我们的社交账号，了解最新动态。</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 class="heading-medium">联系方式</h3>
+                    <p class="body-normal">地点：高座4楼</p>
+                    <p class="body-normal">电邮：fortunate@example.edu.hk</p>
+                    <p class="body-normal">联系电话：+852 XXXX XXXX</p>
+                    
+                    <!-- 美化的支持我们区域 -->
+                    <div class="support-section">
+                        <h3 class="support-title">您的支持是我们前进的动力！</h3>
+                        <p class="support-text">关注我们的社交媒体，为二号内阁加油打气！您的每一个支持都对我们至关重要。</p>
+                        <div class="support-buttons">
+                            <button class="support-button" id="voteButton">
+                                <i class="fa fa-heart"></i> 支持我们
+                            </button>
+                            <button class="support-button" id="shareButton">
+                                <i class="fa fa-share-alt"></i> 分享给朋友
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-image">
+                    <img src="https://picsum.photos/id/42/800/600" alt="学生会办公室" title="学生会办公室地址">
+                </div>
+            </div>
+            
+            <!-- 社交媒体二维码 - 微信客服替换为哔哩哔哩 -->
+            <div class="social-qrcodes">
+                <div class="qrcode-item">
+                    <img src="https://p11-doubao-search-sign.byteimg.com/labis/1ed7d14a5f4301d09af39cdb030e73ec~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1765989721&x-signature=9mkP445e%2BItXRveRZVHtFOG6Xv4%3D" alt="微信公众号" class="qrcode-image" title="微信公众号">
+                    <p class="qrcode-text">微信公众号</p>
+                </div>
+                <div class="qrcode-item">
+                    <img src="https://p3-doubao-search-sign.byteimg.com/labis/43cdc68b430b82b4f269a8ffe3aa0670~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1765989721&x-signature=Ky9AixXjfFT24dzv2%2BcszgyE4m4%3D" alt="Instagram" class="qrcode-image" title="Instagram">
+                    <p class="qrcode-text">Instagram</p>
+                </div>
+                <div class="qrcode-item">
+                    <img src="https://p11-doubao-search-sign.byteimg.com/labis/7a507974bf4dead9804e221d152ffa5d~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1765990984&x-signature=nkTFjjEJZ007pBPQzfTgIN6yXqs%3D" alt="哔哩哔哩" class="qrcode-image" title="哔哩哔哩">
+                    <p class="qrcode-text">哔哩哔哩</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTopButton" class="back-to-top-button">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+    
+    <!-- 页脚 -->
+    <footer id="footer">
+        <div class="container">
+            <p>&copy; 2025 Fortunate 学生会. 版权所有.</p>
+            <p style="margin-top: 10px;">选择二号内阁 - 这将是你最正确的选择之一。</p>
+        </div>
+    </footer>
+
+    <!-- 轮播图动态切换脚本 -->
+    <script>
+        // 获取轮图元素
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const slideInterval = 5000; // 切换间隔时间（毫秒）
+        
+        // 切换轮播图函数
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        // 设置自动轮播
+        setInterval(nextSlide, slideInterval);
+    </script>
+    
+    <!-- 互动按钮和梦幻特效脚本 -->
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取元素
+            const mysteryButton = document.getElementById('mysteryButton');
+            const clickCountDisplay = document.getElementById('clickCount');
+            const dreamEffect = document.getElementById('dreamEffect');
+            const contactButtons = document.querySelectorAll('.contact-button');
+            const footer = document.getElementById('footer');
+            const voteButton = document.getElementById('voteButton');
+            const shareButton = document.getElementById('shareButton');
+            const qrcodeItems = document.querySelectorAll('.qrcode-item');
+            
+            let clickCount = 0;
+            let resetTimer = null;
+            const resetTime = 500; // 0.5秒未点击则重置计数
+            
+            // 颜色数组
+            const colors = [
+                '#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f', 
+                '#e74c3c', '#1abc9c', '#34495e', '#9b59b6', '#f39c12'
+            ];
+            
+            // 显示点击计数 - 大数字样式
+            function updateClickCount() {
+                // 显示当前点击次数
+                clickCountDisplay.textContent = clickCount;
+                
+                // 随机颜色
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                clickCountDisplay.style.color = randomColor;
+                
+                // 添加动画效果
+                clickCountDisplay.classList.remove('active', 'animate');
+                setTimeout(() => {
+                    clickCountDisplay.classList.add('active', 'animate');
+                }, 10);
+                
+                // 重置计时器
+                resetClickCountTimer();
+            }
+            
+            // 重置点击计数计时器
+            function resetClickCountTimer() {
+                if (resetTimer) {
+                    clearTimeout(resetTimer);
+                }
+                
+                // 0.5秒后重置点击次数
+                resetTimer = setTimeout(() => {
+                    // 恢复按钮文字
+                    mysteryButton.textContent = '快来继续点我吧！';
+                    clickCount = 0;
+                    // 隐藏数字
+                    clickCountDisplay.classList.remove('active', 'animate');
+                    // 不显示重置提示，直接隐藏
+                }, resetTime);
+            }
+            
+            // 创建基础梦幻特效（每次点击都显示）
+            function createBaseDreamEffect() {
+                // 创建粒子效果
+                const particleCount = 10;
+                const colors = ['#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f'];
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'dream-particle';
+                    
+                    // 随机颜色
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.backgroundColor = color;
+                    particle.style.boxShadow = `0 0 10px ${color}`;
+                    
+                    // 随机位置（围绕按钮）
+                    const rect = mysteryButton.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
+                    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
+                    
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    
+                    // 随机移动方向和距离
+                    const tx = (Math.random() - 0.5) * 200;
+                    const ty = (Math.random() - 0.5) * 200;
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    
+                    // 随机动画延迟
+                    particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                    
+                    dreamEffect.appendChild(particle);
+                }
+                
+                // 创建光尾效果
+                const trailCount = 8;
+                for (let i = 0; i < trailCount; i++) {
+                    const trail = document.createElement('div');
+                    trail.className = 'dream-trail';
+                    
+                    // 随机颜色
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    trail.style.background = `linear-gradient(to bottom, ${color}80, ${color}00)`;
+                    
+                    // 随机位置（围绕按钮）
+                    const rect = mysteryButton.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 80;
+                    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 80;
+                    
+                    trail.style.left = `${x}px`;
+                    trail.style.top = `${y}px`;
+                    
+                    // 随机角度
+                    const angle = Math.random() * 360;
+                    trail.style.setProperty('--angle', `${angle}deg`);
+                    
+                    // 随机动画延迟
+                    trail.style.animationDelay = `${Math.random() * 0.3}s`;
+                    
+                    dreamEffect.appendChild(trail);
+                }
+            }
+            
+            // 创建增强梦幻特效（特殊次数时显示）
+            function createEnhancedDreamEffect() {
+                // 清除之前的效果
+                dreamEffect.innerHTML = '';
+                
+                // 创建背景光效
+                const bgLight = document.createElement('div');
+                bgLight.className = 'dream-light';
+                bgLight.style.left = '50%';
+                bgLight.style.top = '50%';
+                bgLight.style.transform = 'translate(-50%, -50%)';
+                bgLight.style.animationDelay = '0.2s';
+                dreamEffect.appendChild(bgLight);
+                
+                // 创建多个星星效果
+                const starCount = 30;
+                const colors = ['#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f'];
+                
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'dream-star';
+                    star.innerHTML = '★';
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    star.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    star.style.animationDelay = `${Math.random() * 2}s`;
+                    star.style.fontSize = `${16 + Math.random() * 16}px`;
+                    dreamEffect.appendChild(star);
+                }
+                
+                // 创建粒子效果
+                const particleCount = 20;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'dream-particle';
+                    
+                    // 随机颜色
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.backgroundColor = color;
+                    particle.style.boxShadow = `0 0 10px ${color}`;
+                    
+                    // 随机位置
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // 随机移动方向和距离
+                    const tx = (Math.random() - 0.5) * 300;
+                    const ty = (Math.random() - 0.5) * 300;
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    
+                    // 随机动画延迟
+                    particle.style.animationDelay = `${Math.random() * 0.8}s`;
+                    
+                    dreamEffect.appendChild(particle);
+                }
+                
+                // 显示梦幻效果
+                dreamEffect.classList.add('active');
+                
+                // 5秒后隐藏
+                setTimeout(() => {
+                    dreamEffect.classList.remove('active');
+                }, 5000);
+            }
+            
+            // 创建小型烟花效果
+            function createMiniFireworksEffect() {
+                // 清除之前的效果
+                dreamEffect.innerHTML = '';
+                
+                // 创建烟花效果
+                const fireworkCount = 5;
+                const colors = ['#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f'];
+                
+                for (let i = 0; i < fireworkCount; i++) {
+                    // 随机位置（围绕按钮）
+                    const rect = mysteryButton.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
+                    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
+                    
+                    // 创建烟花粒子
+                    const particleCount = 15;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    for (let j = 0; j < particleCount; j++) {
+                        const particle = document.createElement('div');
+                        particle.className = 'dream-particle';
+                        particle.style.backgroundColor = color;
+                        particle.style.boxShadow = `0 0 10px ${color}`;
+                        particle.style.left = `${x}px`;
+                        particle.style.top = `${y}px`;
+                        
+                        // 随机角度和距离
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = 20 + Math.random() * 30;
+                        const tx = Math.cos(angle) * distance;
+                        const ty = Math.sin(angle) * distance;
+                        
+                        particle.style.setProperty('--tx', `${tx}px`);
+                        particle.style.setProperty('--ty', `${ty}px`);
+                        particle.style.animationDelay = `${Math.random() * 0.3}s`;
+                        
+                        dreamEffect.appendChild(particle);
+                    }
+                }
+                
+                // 显示梦幻效果
+                dreamEffect.classList.add('active');
+                
+                // 3秒后隐藏
+                setTimeout(() => {
+                    dreamEffect.classList.remove('active');
+                }, 3000);
+            }
+            
+            // 创建旋转光环效果
+            function createRotatingRingsEffect() {
+                // 清除之前的效果
+                dreamEffect.innerHTML = '';
+                
+                // 创建旋转光环
+                const ringCount = 3;
+                const colors = ['#e67e23', '#3498db', '#9b59b6'];
+                
+                // 获取按钮中心位置
+                const rect = mysteryButton.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                for (let i = 0; i < ringCount; i++) {
+                    const ring = document.createElement('div');
+                    ring.className = 'dream-ring';
+                    ring.style.position = 'absolute';
+                    ring.style.width = `${100 + i * 50}px`;
+                    ring.style.height = `${100 + i * 50}px`;
+                    ring.style.left = `${centerX - (50 + i * 25)}px`;
+                    ring.style.top = `${centerY - (50 + i * 25)}px`;
+                    ring.style.borderRadius = '50%';
+                    ring.style.border = `2px solid ${colors[i % colors.length]}`;
+                    ring.style.boxShadow = `0 0 10px ${colors[i % colors.length]}`;
+                    ring.style.opacity = '0';
+                    ring.style.animation = `rotateRing ${3 - i * 0.5}s ease-in-out forwards`;
+                    ring.style.animationDelay = `${i * 0.3}s`;
+                    
+                    dreamEffect.appendChild(ring);
+                }
+                
+                // 添加旋转光环动画
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes rotateRing {
+                        0% {
+                            transform: scale(0.5) rotate(0deg);
+                            opacity: 0;
+                        }
+                        50% {
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: scale(1.5) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // 显示梦幻效果
+                dreamEffect.classList.add('active');
+                
+                // 5秒后隐藏
+                setTimeout(() => {
+                    dreamEffect.classList.remove('active');
+                }, 5000);
+            }
+            
+            // 创建星光闪烁效果
+            function createStarBurstEffect() {
+                // 清除之前的效果
+                dreamEffect.innerHTML = '';
+                
+                // 创建多个星星效果
+                const starCount = 50;
+                const colors = ['#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f', '#ffffff'];
+                
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'dream-star';
+                    star.innerHTML = i % 3 === 0 ? '★' : i % 3 === 1 ? '☆' : '✦';
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    star.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    star.style.animationDelay = `${Math.random() * 1.5}s`;
+                    star.style.fontSize = `${16 + Math.random() * 24}px`;
+                    star.style.animation = `twinkleBurst ${2 + Math.random() * 2}s ease-in-out forwards`;
+                    
+                    dreamEffect.appendChild(star);
+                }
+                
+                // 添加星光闪烁动画
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes twinkleBurst {
+                        0% {
+                            transform: scale(0) rotate(0deg);
+                            opacity: 0;
+                        }
+                        20% {
+                            transform: scale(1.5) rotate(15deg);
+                            opacity: 1;
+                            text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px currentColor;
+                        }
+                        40% {
+                            transform: scale(1) rotate(0deg);
+                        }
+                        60% {
+                            opacity: 1;
+                            transform: scale(1.2) rotate(-10deg);
+                        }
+                        100% {
+                            transform: scale(0.5) rotate(10deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // 显示梦幻效果
+                dreamEffect.classList.add('active');
+                
+                // 6秒后隐藏
+                setTimeout(() => {
+                    dreamEffect.classList.remove('active');
+                }, 6000);
+            }
+            
+            // 创建彩虹爆炸效果
+            function createRainbowExplosionEffect() {
+                // 清除之前的效果
+                dreamEffect.innerHTML = '';
+                
+                // 创建彩虹光环
+                const ringCount = 6;
+                const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#8b00ff'];
+                
+                // 获取按钮中心位置
+                const rect = mysteryButton.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                // 创建彩虹光环
+                for (let i = 0; i < ringCount; i++) {
+                    const ring = document.createElement('div');
+                    ring.className = 'dream-rainbow-ring';
+                    ring.style.position = 'absolute';
+                    ring.style.width = `${50 + i * 40}px`;
+                    ring.style.height = `${50 + i * 40}px`;
+                    ring.style.left = `${centerX - (25 + i * 20)}px`;
+                    ring.style.top = `${centerY - (25 + i * 20)}px`;
+                    ring.style.borderRadius = '50%';
+                    ring.style.border = `3px solid ${colors[i % colors.length]}`;
+                    ring.style.boxShadow = `0 0 15px ${colors[i % colors.length]}`;
+                    ring.style.opacity = '0';
+                    ring.style.animation = `explodeRing ${3 + i * 0.2}s ease-out forwards`;
+                    ring.style.animationDelay = `${i * 0.2}s`;
+                    
+                    dreamEffect.appendChild(ring);
+                }
+                
+                // 创建彩色粒子
+                const particleCount = 100;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'dream-particle';
+                    
+                    // 随机颜色
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.backgroundColor = color;
+                    particle.style.boxShadow = `0 0 10px ${color}`;
+                    
+                    // 随机位置（围绕按钮）
+                    particle.style.left = `${centerX}px`;
+                    particle.style.top = `${centerY}px`;
+                    
+                    // 随机角度和距离
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 50 + Math.random() * 200;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+                    
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                    particle.style.animationDuration = `${1.5 + Math.random() * 2}s`;
+                    
+                    dreamEffect.appendChild(particle);
+                }
+                
+                // 添加彩虹爆炸动画
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes explodeRing {
+                        0% {
+                            transform: scale(0);
+                            opacity: 0;
+                        }
+                        20% {
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: scale(3);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // 显示梦幻效果
+                dreamEffect.classList.add('active');
+                
+                // 8秒后隐藏
+                setTimeout(() => {
+                    dreamEffect.classList.remove('active');
+                }, 8000);
+            }
+            
+            // 创建数字浮动效果
+            function createFloatingNumbers() {
+                // 清除之前的效果
+                dreamEffect.innerHTML = '';
+                
+                // 创建多个数字
+                const numbers = [2, 0, 2, 5];
+                const colors = ['#e67e23', '#3498db', '#2ecc71', '#9b59b6'];
+                
+                numbers.forEach((num, index) => {
+                    const numberElement = document.createElement('div');
+                    numberElement.className = 'dream-number';
+                    numberElement.textContent = num;
+                    numberElement.style.left = `${20 + index * 15}%`;
+                    numberElement.style.top = `${40 + Math.random() * 20}%`;
+                    numberElement.style.color = colors[index % colors.length];
+                    numberElement.style.animationDelay = `${index * 0.5}s`;
+                    
+                    dreamEffect.appendChild(numberElement);
+                });
+                
+                // 创建粒子效果
+                const particleCount = 15;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'dream-particle';
+                    
+                    // 随机颜色
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.backgroundColor = color;
+                    particle.style.boxShadow = `0 0 10px ${color}`;
+                    
+                    // 随机位置
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // 随机移动方向和距离
+                    const tx = (Math.random() - 0.5) * 200;
+                    const ty = (Math.random() - 0.5) * 200;
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    
+                    // 随机动画延迟
+                    particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                    
+                    dreamEffect.appendChild(particle);
+                }
+                
+                // 显示梦幻效果
+                dreamEffect.classList.add('active');
+                
+                // 5秒后隐藏
+                setTimeout(() => {
+                    dreamEffect.classList.remove('active');
+                }, 5000);
+            }
+            
+            // 按钮点击事件
+            mysteryButton.addEventListener('click', function() {
+                clickCount++;
+                updateClickCount();
+                
+                // 按钮文字切换逻辑
+                this.textContent = '支持我们';
+                
+                // 添加按钮点击动画
+                this.classList.add('quick-bounce');
+                setTimeout(() => {
+                    this.classList.remove('quick-bounce');
+                }, 300);
+                
+                // 每次点击都显示基础梦幻特效
+                createBaseDreamEffect();
+                
+                // 达到特殊阈值时触发不同的梦幻特效，增加用户的胜负欲
+                if (clickCount === 5) {
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('不错的开始！您已点击5次，继续加油！');
+                    }, 500);
+                } else if (clickCount === 10) {
+                    createMiniFireworksEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('太棒了！您已点击10次，继续挑战更高记录！');
+                    }, 1000);
+                } else if (clickCount === 15) {
+                    // 旋转光环效果
+                    createRotatingRingsEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('精彩！您已点击15次，保持这个节奏！');
+                    }, 1000);
+                } else if (clickCount === 20) {
+                    createEnhancedDreamEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('太厉害了！您已点击20次，您的支持令人印象深刻！');
+                    }, 1000);
+                } else if (clickCount === 25) {
+                    createRotatingRingsEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('哇！您已点击25次，您真的很支持我们！');
+                    }, 1000);
+                } else if (clickCount === 30) {
+                    createEnhancedDreamEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('难以置信！您已点击30次，您的热情令人惊叹！');
+                    }, 1000);
+                } else if (clickCount === 40) {
+                    createStarBurstEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('您太疯狂了！您已点击40次，您是我们的超级支持者！');
+                    }, 1000);
+                } else if (clickCount === 50) {
+                    createStarBurstEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('太不可思议了！您已点击50次，您是我们的超级粉丝！');
+                    }, 1000);
+                } else if (clickCount === 60) {
+                    createEnhancedDreamEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('您的支持无与伦比！您已点击60次，继续前进！');
+                    }, 1000);
+                } else if (clickCount === 70) {
+                    createRotatingRingsEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('您是传奇！您已点击70次，您的坚持令人钦佩！');
+                    }, 1000);
+                } else if (clickCount === 80) {
+                    createStarBurstEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('接近目标！您已点击80次，再坚持一下！');
+                    }, 1000);
+                } else if (clickCount === 90) {
+                    createEnhancedDreamEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('最后冲刺！您已点击90次，只差一点点！');
+                    }, 1000);
+                } else if (clickCount === 100) {
+                    createRainbowExplosionEffect();
+                    // 数字放大效果
+                    clickCountDisplay.classList.add('number-scale');
+                    setTimeout(() => {
+                        clickCountDisplay.classList.remove('number-scale');
+                    }, 800);
+                    setTimeout(() => {
+                        alert('传奇！您已点击100次，您是我们的传奇支持者！');
+                    }, 1000);
+                }
+                
+                // 重置计时器
+                resetClickCountTimer();
+            });
+            
+            // 社交媒体图标点击事件
+            qrcodeItems.forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    const platforms = ['微信公众号', 'Instagram', '哔哩哔哩'];
+                    const messages = [
+                        '微信公众号：扫描二维码关注我们，获取最新资讯！',
+                        'Instagram：扫描二维码关注我们的Instagram账号，了解更多精彩瞬间！',
+                        '哔哩哔哩：扫描二维码关注我们的B站账号，观看更多视频内容！'
+                    ];
+                    
+                    alert(messages[index]);
+                    
+                    // 添加点击动画效果
+                    this.classList.add('footer-bounce');
+                    setTimeout(() => {
+                        this.classList.remove('footer-bounce');
+                    }, 600);
+                });
+            });
+            
+            // 支持按钮点击事件
+            voteButton.addEventListener('click', function() {
+                alert('感谢您的支持！您的支持是我们前进的最大动力！');
+                this.classList.add('ultra-bounce');
+                setTimeout(() => {
+                    this.classList.remove('ultra-bounce');
+                }, 200);
+            });
+            
+            // 分享按钮点击事件
+            shareButton.addEventListener('click', function() {
+                alert('分享功能即将上线，敬请期待！');
+                this.classList.add('ultra-bounce');
+                setTimeout(() => {
+                    this.classList.remove('ultra-bounce');
+                }, 200);
+            });
+            
+            // 实现"联系我们"按钮的平滑滚动到页脚
+            contactButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 滚动到页脚
+                    footer.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // 添加动画效果
+                    footer.classList.add('footer-bounce');
+                    setTimeout(() => {
+                        footer.classList.remove('footer-bounce');
+                    }, 600);
+                });
+            });
+            
+            // 导航菜单中的"联系我们"也添加平滑滚动
+            const navContactLink = document.querySelector('.nav-menu a[href="#contact"]');
+            if (navContactLink) {
+                navContactLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 滚动到页脚
+                    footer.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // 添加动画效果
+                    footer.classList.add('footer-bounce');
+                    setTimeout(() => {
+                        footer.classList.remove('footer-bounce');
+                    }, 600);
+                });
+            }
+            
+            // 返回顶部顶部按钮功能
+            const backToTopButton = document.getElementById('backToTopButton');
+            
+            // 滚动事件监听
+            window.addEventListener('scroll', function() {
+                // 当页面滚动超过500px时显示返回顶部按钮
+                if (window.pageYOffset > 500) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            // 点击返回顶部
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // 添加按钮点击动画
+                this.classList.add('quick-bounce');
+                setTimeout(() => {
+                    this.classList.remove('quick-bounce');
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
