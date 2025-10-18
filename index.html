@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" href="/fortunate/style.css">
+    <link rel="icon" href=""/>
     <title>赋能学子，塑造未来 | Fortunate 学生会</title>
     <meta http-equiv="Content-Language" content="zh-CN"/>
     <meta name="keywords" content="学生会竞选,学生会,学生组织,学生福利,校园活动,香港校园"/>
     <meta name="description" content="Fortunate致力于打造一个更加开放、包容、创新的学生会组织，为每一位同学提供展示才华、实现梦想的舞台。"/>
+    <link rel="stylesheet" href="style.css"/>
     
     <style>
         /* 互动按钮样式 - 移到联系我们右边 */
@@ -1373,7 +1374,7 @@
             }
             
             // 创建基础梦幻特效（每次点击都显示）
-            function createBaseDreamEffect(target = 'both') {
+            function createBaseDreamEffect() {
                 // 创建粒子效果
                 const particleCount = 10;
                 const colors = ['#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f'];
@@ -1387,20 +1388,10 @@
                     particle.style.backgroundColor = color;
                     particle.style.boxShadow = `0 0 10px ${color}`;
                     
-                    let x, y;
-                    
-                    // 根据目标位置决定粒子生成位置
-                    if (target === 'button' || (target === 'both' && Math.random() > 0.5)) {
-                        // 围绕按钮
-                        const rect = mysteryButton.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
-                    } else {
-                        // 围绕数字
-                        const rect = clickCountDisplay.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
-                    }
+                    // 随机位置（围绕按钮）
+                    const rect = mysteryButton.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
+                    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
                     
                     particle.style.left = `${x}px`;
                     particle.style.top = `${y}px`;
@@ -1427,20 +1418,10 @@
                     const color = colors[Math.floor(Math.random() * colors.length)];
                     trail.style.background = `linear-gradient(to bottom, ${color}80, ${color}00)`;
                     
-                    let x, y;
-                    
-                    // 根据目标位置决定光尾生成位置
-                    if (target === 'button' || (target === 'both' && Math.random() > 0.5)) {
-                        // 围绕按钮
-                        const rect = mysteryButton.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 80;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 80;
-                    } else {
-                        // 围绕数字
-                        const rect = clickCountDisplay.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 80;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 80;
-                    }
+                    // 随机位置（围绕按钮）
+                    const rect = mysteryButton.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 80;
+                    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 80;
                     
                     trail.style.left = `${x}px`;
                     trail.style.top = `${y}px`;
@@ -1457,7 +1438,7 @@
             }
             
             // 创建增强梦幻特效（特殊次数时显示）
-            function createEnhancedDreamEffect(target = 'both') {
+            function createEnhancedDreamEffect() {
                 // 清除之前的效果
                 dreamEffect.innerHTML = '';
                 
@@ -1497,23 +1478,9 @@
                     particle.style.backgroundColor = color;
                     particle.style.boxShadow = `0 0 10px ${color}`;
                     
-                    let x, y;
-                    
-                    // 根据目标位置决定粒子生成位置
-                    if (target === 'button' || (target === 'both' && Math.random() > 0.5)) {
-                        // 围绕按钮
-                        const rect = mysteryButton.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 150;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 150;
-                    } else {
-                        // 围绕数字
-                        const rect = clickCountDisplay.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 150;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 150;
-                    }
-                    
-                    particle.style.left = `${x}px`;
-                    particle.style.top = `${y}px`;
+                    // 随机位置
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
                     
                     // 随机移动方向和距离
                     const tx = (Math.random() - 0.5) * 300;
@@ -1537,7 +1504,7 @@
             }
             
             // 创建小型烟花效果
-            function createMiniFireworksEffect(target = 'both') {
+            function createMiniFireworksEffect() {
                 // 清除之前的效果
                 dreamEffect.innerHTML = '';
                 
@@ -1546,20 +1513,10 @@
                 const colors = ['#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f'];
                 
                 for (let i = 0; i < fireworkCount; i++) {
-                    let x, y;
-                    
-                    // 根据目标位置决定烟花生成位置
-                    if (target === 'button' || (target === 'both' && Math.random() > 0.5)) {
-                        // 围绕按钮
-                        const rect = mysteryButton.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
-                    } else {
-                        // 围绕数字
-                        const rect = clickCountDisplay.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
-                    }
+                    // 随机位置（围绕按钮）
+                    const rect = mysteryButton.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
+                    const y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
                     
                     // 创建烟花粒子
                     const particleCount = 15;
@@ -1597,7 +1554,7 @@
             }
             
             // 创建旋转光环效果
-            function createRotatingRingsEffect(target = 'both') {
+            function createRotatingRingsEffect() {
                 // 清除之前的效果
                 dreamEffect.innerHTML = '';
                 
@@ -1605,98 +1562,11 @@
                 const ringCount = 3;
                 const colors = ['#e67e23', '#3498db', '#9b59b6'];
                 
-                // 根据目标位置决定光环中心
-                let centerX, centerY;
+                // 获取按钮中心位置
+                const rect = mysteryButton.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
                 
-                if (target === 'button') {
-                    // 按钮中心
-                    const rect = mysteryButton.getBoundingClientRect();
-                    centerX = rect.left + rect.width / 2;
-                    centerY = rect.top + rect.height / 2;
-                } else if (target === 'number') {
-                    // 数字中心
-                    const rect = clickCountDisplay.getBoundingClientRect();
-                    centerX = rect.left + rect.width / 2;
-                    centerY = rect.top + rect.height / 2;
-                } else {
-                    // 两个位置都显示
-                    // 先创建按钮周围的光环
-                    const buttonRect = mysteryButton.getBoundingClientRect();
-                    const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-                    const buttonCenterY = buttonRect.top + buttonRect.height / 2;
-                    
-                    for (let i = 0; i < ringCount; i++) {
-                        const ring = document.createElement('div');
-                        ring.className = 'dream-ring';
-                        ring.style.position = 'absolute';
-                        ring.style.width = `${100 + i * 50}px`;
-                        ring.style.height = `${100 + i * 50}px`;
-                        ring.style.left = `${buttonCenterX - (50 + i * 25)}px`;
-                        ring.style.top = `${buttonCenterY - (50 + i * 25)}px`;
-                        ring.style.borderRadius = '50%';
-                        ring.style.border = `2px solid ${colors[i % colors.length]}`;
-                        ring.style.boxShadow = `0 0 10px ${colors[i % colors.length]}`;
-                        ring.style.opacity = '0';
-                        ring.style.animation = `rotateRing ${3 - i * 0.5}s ease-in-out forwards`;
-                        ring.style.animationDelay = `${i * 0.3}s`;
-                        
-                        dreamEffect.appendChild(ring);
-                    }
-                    
-                    // 再创建数字周围的光环
-                    const numberRect = clickCountDisplay.getBoundingClientRect();
-                    const numberCenterX = numberRect.left + numberRect.width / 2;
-                    const numberCenterY = numberRect.top + numberRect.height / 2;
-                    
-                    for (let i = 0; i < ringCount; i++) {
-                        const ring = document.createElement('div');
-                        ring.className = 'dream-ring';
-                        ring.style.position = 'absolute';
-                        ring.style.width = `${100 + i * 50}px`;
-                        ring.style.height = `${100 + i * 50}px`;
-                        ring.style.left = `${numberCenterX - (50 + i * 25)}px`;
-                        ring.style.top = `${numberCenterY - (50 + i * 25)}px`;
-                        ring.style.borderRadius = '50%';
-                        ring.style.border = `2px solid ${colors[(i + 1) % colors.length]}`;
-                        ring.style.boxShadow = `0 0 10px ${colors[(i + 1) % colors.length]}`;
-                        ring.style.opacity = '0';
-                        ring.style.animation = `rotateRing ${3 - i * 0.5}s ease-in-out forwards`;
-                        ring.style.animationDelay = `${i * 0.3 + 0.2}s`; // 稍微延迟一点
-                        
-                        dreamEffect.appendChild(ring);
-                    }
-                    
-                    // 添加旋转光环动画
-                    const style = document.createElement('style');
-                    style.textContent = `
-                        @keyframes rotateRing {
-                            0% {
-                                transform: scale(0.5) rotate(0deg);
-                                opacity: 0;
-                            }
-                            50% {
-                                opacity: 1;
-                            }
-                            100% {
-                                transform: scale(1.5) rotate(360deg);
-                                opacity: 0;
-                            }
-                        }
-                    `;
-                    document.head.appendChild(style);
-                    
-                    // 显示梦幻效果
-                    dreamEffect.classList.add('active');
-                    
-                    // 5秒后隐藏
-                    setTimeout(() => {
-                        dreamEffect.classList.remove('active');
-                    }, 5000);
-                    
-                    return; // 提前返回，避免重复添加
-                }
-                
-                // 如果是单一目标位置
                 for (let i = 0; i < ringCount; i++) {
                     const ring = document.createElement('div');
                     ring.className = 'dream-ring';
@@ -1744,7 +1614,7 @@
             }
             
             // 创建星光闪烁效果
-            function createStarBurstEffect(target = 'both') {
+            function createStarBurstEffect() {
                 // 清除之前的效果
                 dreamEffect.innerHTML = '';
                 
@@ -1756,24 +1626,8 @@
                     const star = document.createElement('div');
                     star.className = 'dream-star';
                     star.innerHTML = i % 3 === 0 ? '★' : i % 3 === 1 ? '☆' : '✦';
-                    
-                    let x, y;
-                    
-                    // 根据目标位置决定星星生成位置
-                    if (target === 'button' || (target === 'both' && Math.random() > 0.5)) {
-                        // 围绕按钮
-                        const rect = mysteryButton.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 300;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 300;
-                    } else {
-                        // 围绕数字
-                        const rect = clickCountDisplay.getBoundingClientRect();
-                        x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 300;
-                        y = rect.top + rect.height / 2 + (Math.random() - 0.5) * 300;
-                    }
-                    
-                    star.style.left = `${x}px`;
-                    star.style.top = `${y}px`;
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
                     star.style.color = colors[Math.floor(Math.random() * colors.length)];
                     star.style.animationDelay = `${Math.random() * 1.5}s`;
                     star.style.fontSize = `${16 + Math.random() * 24}px`;
@@ -1820,7 +1674,7 @@
             }
             
             // 创建彩虹爆炸效果
-            function createRainbowExplosionEffect(target = 'both') {
+            function createRainbowExplosionEffect() {
                 // 清除之前的效果
                 dreamEffect.innerHTML = '';
                 
@@ -1828,175 +1682,57 @@
                 const ringCount = 6;
                 const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#8b00ff'];
                 
-                if (target === 'both') {
-                    // 获取按钮中心位置
-                    const buttonRect = mysteryButton.getBoundingClientRect();
-                    const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-                    const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+                // 获取按钮中心位置
+                const rect = mysteryButton.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                // 创建彩虹光环
+                for (let i = 0; i < ringCount; i++) {
+                    const ring = document.createElement('div');
+                    ring.className = 'dream-rainbow-ring';
+                    ring.style.position = 'absolute';
+                    ring.style.width = `${50 + i * 40}px`;
+                    ring.style.height = `${50 + i * 40}px`;
+                    ring.style.left = `${centerX - (25 + i * 20)}px`;
+                    ring.style.top = `${centerY - (25 + i * 20)}px`;
+                    ring.style.borderRadius = '50%';
+                    ring.style.border = `3px solid ${colors[i % colors.length]}`;
+                    ring.style.boxShadow = `0 0 15px ${colors[i % colors.length]}`;
+                    ring.style.opacity = '0';
+                    ring.style.animation = `explodeRing ${3 + i * 0.2}s ease-out forwards`;
+                    ring.style.animationDelay = `${i * 0.2}s`;
                     
-                    // 获取数字中心位置
-                    const numberRect = clickCountDisplay.getBoundingClientRect();
-                    const numberCenterX = numberRect.left + numberRect.width / 2;
-                    const numberCenterY = numberRect.top + numberRect.height / 2;
+                    dreamEffect.appendChild(ring);
+                }
+                
+                // 创建彩色粒子
+                const particleCount = 100;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'dream-particle';
                     
-                    // 创建按钮周围的彩虹光环
-                    for (let i = 0; i < ringCount; i++) {
-                        const ring = document.createElement('div');
-                        ring.className = 'dream-rainbow-ring';
-                        ring.style.position = 'absolute';
-                        ring.style.width = `${50 + i * 40}px`;
-                        ring.style.height = `${50 + i * 40}px`;
-                        ring.style.left = `${buttonCenterX - (25 + i * 20)}px`;
-                        ring.style.top = `${buttonCenterY - (25 + i * 20)}px`;
-                        ring.style.borderRadius = '50%';
-                        ring.style.border = `3px solid ${colors[i % colors.length]}`;
-                        ring.style.boxShadow = `0 0 15px ${colors[i % colors.length]}`;
-                        ring.style.opacity = '0';
-                        ring.style.animation = `explodeRing ${3 + i * 0.2}s ease-out forwards`;
-                        ring.style.animationDelay = `${i * 0.2}s`;
-                        
-                        dreamEffect.appendChild(ring);
-                    }
+                    // 随机颜色
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.backgroundColor = color;
+                    particle.style.boxShadow = `0 0 10px ${color}`;
                     
-                    // 创建数字周围的彩虹光环
-                    for (let i = 0; i < ringCount; i++) {
-                        const ring = document.createElement('div');
-                        ring.className = 'dream-rainbow-ring';
-                        ring.style.position = 'absolute';
-                        ring.style.width = `${50 + i * 40}px`;
-                        ring.style.height = `${50 + i * 40}px`;
-                        ring.style.left = `${numberCenterX - (25 + i * 20)}px`;
-                        ring.style.top = `${numberCenterY - (25 + i * 20)}px`;
-                        ring.style.borderRadius = '50%';
-                        ring.style.border = `3px solid ${colors[(i + 1) % colors.length]}`;
-                        ring.style.boxShadow = `0 0 15px ${colors[(i + 1) % colors.length]}`;
-                        ring.style.opacity = '0';
-                        ring.style.animation = `explodeRing ${3 + i * 0.2}s ease-out forwards`;
-                        ring.style.animationDelay = `${i * 0.2 + 0.3}s`; // 稍微延迟一点
-                        
-                        dreamEffect.appendChild(ring);
-                    }
+                    // 随机位置（围绕按钮）
+                    particle.style.left = `${centerX}px`;
+                    particle.style.top = `${centerY}px`;
                     
-                    // 创建按钮周围的彩色粒子
-                    const buttonParticleCount = 50;
-                    for (let i = 0; i < buttonParticleCount; i++) {
-                        const particle = document.createElement('div');
-                        particle.className = 'dream-particle';
-                        
-                        // 随机颜色
-                        const color = colors[Math.floor(Math.random() * colors.length)];
-                        particle.style.backgroundColor = color;
-                        particle.style.boxShadow = `0 0 10px ${color}`;
-                        
-                        // 随机位置（围绕按钮）
-                        particle.style.left = `${buttonCenterX}px`;
-                        particle.style.top = `${buttonCenterY}px`;
-                        
-                        // 随机角度和距离
-                        const angle = Math.random() * Math.PI * 2;
-                        const distance = 50 + Math.random() * 200;
-                        const tx = Math.cos(angle) * distance;
-                        const ty = Math.sin(angle) * distance;
-                        
-                        particle.style.setProperty('--tx', `${tx}px`);
-                        particle.style.setProperty('--ty', `${ty}px`);
-                        particle.style.animationDelay = `${Math.random() * 0.5}s`;
-                        particle.style.animationDuration = `${1.5 + Math.random() * 2}s`;
-                        
-                        dreamEffect.appendChild(particle);
-                    }
+                    // 随机角度和距离
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 50 + Math.random() * 200;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
                     
-                    // 创建数字周围的彩色粒子
-                    const numberParticleCount = 50;
-                    for (let i = 0; i < numberParticleCount; i++) {
-                        const particle = document.createElement('div');
-                        particle.className = 'dream-particle';
-                        
-                        // 随机颜色
-                        const color = colors[Math.floor(Math.random() * colors.length)];
-                        particle.style.backgroundColor = color;
-                        particle.style.boxShadow = `0 0 10px ${color}`;
-                        
-                        // 随机位置（围绕数字）
-                        particle.style.left = `${numberCenterX}px`;
-                        particle.style.top = `${numberCenterY}px`;
-                        
-                        // 随机角度和距离
-                        const angle = Math.random() * Math.PI * 2;
-                        const distance = 50 + Math.random() * 200;
-                        const tx = Math.cos(angle) * distance;
-                        const ty = Math.sin(angle) * distance;
-                        
-                        particle.style.setProperty('--tx', `${tx}px`);
-                        particle.style.setProperty('--ty', `${ty}px`);
-                        particle.style.animationDelay = `${Math.random() * 0.5 + 0.2}s`; // 稍微延迟一点
-                        particle.style.animationDuration = `${1.5 + Math.random() * 2}s`;
-                        
-                        dreamEffect.appendChild(particle);
-                    }
-                } else {
-                    // 单一目标位置
-                    let centerX, centerY;
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                    particle.style.animationDuration = `${1.5 + Math.random() * 2}s`;
                     
-                    if (target === 'button') {
-                        // 按钮中心
-                        const rect = mysteryButton.getBoundingClientRect();
-                        centerX = rect.left + rect.width / 2;
-                        centerY = rect.top + rect.height / 2;
-                    } else {
-                        // 数字中心
-                        const rect = clickCountDisplay.getBoundingClientRect();
-                        centerX = rect.left + rect.width / 2;
-                        centerY = rect.top + rect.height / 2;
-                    }
-                    
-                    // 创建彩虹光环
-                    for (let i = 0; i < ringCount; i++) {
-                        const ring = document.createElement('div');
-                        ring.className = 'dream-rainbow-ring';
-                        ring.style.position = 'absolute';
-                        ring.style.width = `${50 + i * 40}px`;
-                        ring.style.height = `${50 + i * 40}px`;
-                        ring.style.left = `${centerX - (25 + i * 20)}px`;
-                        ring.style.top = `${centerY - (25 + i * 20)}px`;
-                        ring.style.borderRadius = '50%';
-                        ring.style.border = `3px solid ${colors[i % colors.length]}`;
-                        ring.style.boxShadow = `0 0 15px ${colors[i % colors.length]}`;
-                        ring.style.opacity = '0';
-                        ring.style.animation = `explodeRing ${3 + i * 0.2}s ease-out forwards`;
-                        ring.style.animationDelay = `${i * 0.2}s`;
-                        
-                        dreamEffect.appendChild(ring);
-                    }
-                    
-                    // 创建彩色粒子
-                    const particleCount = 100;
-                    for (let i = 0; i < particleCount; i++) {
-                        const particle = document.createElement('div');
-                        particle.className = 'dream-particle';
-                        
-                        // 随机颜色
-                        const color = colors[Math.floor(Math.random() * colors.length)];
-                        particle.style.backgroundColor = color;
-                        particle.style.boxShadow = `0 0 10px ${color}`;
-                        
-                        // 随机位置（围绕目标）
-                        particle.style.left = `${centerX}px`;
-                        particle.style.top = `${centerY}px`;
-                        
-                        // 随机角度和距离
-                        const angle = Math.random() * Math.PI * 2;
-                        const distance = 50 + Math.random() * 200;
-                        const tx = Math.cos(angle) * distance;
-                        const ty = Math.sin(angle) * distance;
-                        
-                        particle.style.setProperty('--tx', `${tx}px`);
-                        particle.style.setProperty('--ty', `${ty}px`);
-                        particle.style.animationDelay = `${Math.random() * 0.5}s`;
-                        particle.style.animationDuration = `${1.5 + Math.random() * 2}s`;
-                        
-                        dreamEffect.appendChild(particle);
-                    }
+                    dreamEffect.appendChild(particle);
                 }
                 
                 // 添加彩虹爆炸动画
@@ -2098,8 +1834,8 @@
                     this.classList.remove('quick-bounce');
                 }, 300);
                 
-                // 每次点击都显示基础梦幻特效 - 同时在按钮和数字周围显示
-                createBaseDreamEffect('both');
+                // 每次点击都显示基础梦幻特效
+                createBaseDreamEffect();
                 
                 // 达到特殊阈值时触发不同的梦幻特效，增加用户的胜负欲
                 if (clickCount === 5) {
@@ -2112,8 +1848,7 @@
                         alert('不错的开始！您已点击5次，继续加油！');
                     }, 500);
                 } else if (clickCount === 10) {
-                    // 主要在数字周围显示烟花效果
-                    createMiniFireworksEffect('number');
+                    createMiniFireworksEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2123,8 +1858,8 @@
                         alert('太棒了！您已点击10次，继续挑战更高记录！');
                     }, 1000);
                 } else if (clickCount === 15) {
-                    // 旋转光环效果 - 同时在按钮和数字周围显示
-                    createRotatingRingsEffect('both');
+                    // 旋转光环效果
+                    createRotatingRingsEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2134,8 +1869,7 @@
                         alert('精彩！您已点击15次，保持这个节奏！');
                     }, 1000);
                 } else if (clickCount === 20) {
-                    // 主要在数字周围显示增强梦幻特效
-                    createEnhancedDreamEffect('number');
+                    createEnhancedDreamEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2145,8 +1879,7 @@
                         alert('太厉害了！您已点击20次，您的支持令人印象深刻！');
                     }, 1000);
                 } else if (clickCount === 25) {
-                    // 旋转光环效果 - 主要在数字周围显示
-                    createRotatingRingsEffect('number');
+                    createRotatingRingsEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2156,8 +1889,7 @@
                         alert('哇！您已点击25次，您真的很支持我们！');
                     }, 1000);
                 } else if (clickCount === 30) {
-                    // 增强梦幻特效 - 同时在按钮和数字周围显示
-                    createEnhancedDreamEffect('both');
+                    createEnhancedDreamEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2167,8 +1899,7 @@
                         alert('难以置信！您已点击30次，您的热情令人惊叹！');
                     }, 1000);
                 } else if (clickCount === 40) {
-                    // 星光闪烁效果 - 主要在数字周围显示
-                    createStarBurstEffect('number');
+                    createStarBurstEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2178,8 +1909,7 @@
                         alert('您太疯狂了！您已点击40次，您是我们的超级支持者！');
                     }, 1000);
                 } else if (clickCount === 50) {
-                    // 星光闪烁效果 - 同时在按钮和数字周围显示
-                    createStarBurstEffect('both');
+                    createStarBurstEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2189,8 +1919,7 @@
                         alert('太不可思议了！您已点击50次，您是我们的超级粉丝！');
                     }, 1000);
                 } else if (clickCount === 60) {
-                    // 增强梦幻特效 - 主要在数字周围显示
-                    createEnhancedDreamEffect('number');
+                    createEnhancedDreamEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2200,8 +1929,7 @@
                         alert('您的支持无与伦比！您已点击60次，继续前进！');
                     }, 1000);
                 } else if (clickCount === 70) {
-                    // 旋转光环效果 - 同时在按钮和数字周围显示
-                    createRotatingRingsEffect('both');
+                    createRotatingRingsEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2211,8 +1939,7 @@
                         alert('您是传奇！您已点击70次，您的坚持令人钦佩！');
                     }, 1000);
                 } else if (clickCount === 80) {
-                    // 星光闪烁效果 - 主要在数字周围显示
-                    createStarBurstEffect('number');
+                    createStarBurstEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2222,8 +1949,7 @@
                         alert('接近目标！您已点击80次，再坚持一下！');
                     }, 1000);
                 } else if (clickCount === 90) {
-                    // 增强梦幻特效 - 同时在按钮和数字周围显示
-                    createEnhancedDreamEffect('both');
+                    createEnhancedDreamEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
@@ -2233,8 +1959,7 @@
                         alert('最后冲刺！您已点击90次，只差一点点！');
                     }, 1000);
                 } else if (clickCount === 100) {
-                    // 彩虹爆炸效果 - 同时在按钮和数字周围显示
-                    createRainbowExplosionEffect('both');
+                    createRainbowExplosionEffect();
                     // 数字放大效果
                     clickCountDisplay.classList.add('number-scale');
                     setTimeout(() => {
