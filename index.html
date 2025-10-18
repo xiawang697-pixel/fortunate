@@ -183,6 +183,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
+            justify-content: center;
         }
         
         .plan-card {
@@ -231,11 +232,24 @@
         
         .team-image {
             height: 250px;
-            background-color: #e0e0e0;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
+        }
+        
+        .circle-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #e67e23;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #ffffff;
+            font-weight: bold;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .team-info {
@@ -293,6 +307,10 @@
             
             .heading-large {
                 font-size: 2rem;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -356,24 +374,6 @@
                         <p class="body-normal">我们正在策划更多精彩活动，敬请关注！</p>
                     </div>
                 </div>
-                <div class="plan-card">
-                    <div class="plan-image">
-                        活动计划
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="heading-medium">校园文化节</h3>
-                        <p class="body-normal">打造丰富多彩的校园文化活动，展示学生才艺。</p>
-                    </div>
-                </div>
-                <div class="plan-card">
-                    <div class="plan-image">
-                        活动计划
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="heading-medium">学术讲座</h3>
-                        <p class="body-normal">邀请专家学者，分享前沿知识与经验。</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -388,7 +388,7 @@
             <div class="team-grid">
                 <div class="team-card">
                     <div class="team-image">
-                        会长照片
+                        <div class="circle-avatar">越</div>
                     </div>
                     <div class="team-info">
                         <h3 class="heading-medium">越迪文 会长</h3>
@@ -397,7 +397,7 @@
                 </div>
                 <div class="team-card">
                     <div class="team-image">
-                        总务成员照片
+                        <div class="circle-avatar">郑</div>
                     </div>
                     <div class="team-info">
                         <h3 class="heading-medium">郑熙雯 总务成员</h3>
@@ -406,7 +406,7 @@
                 </div>
                 <div class="team-card">
                     <div class="team-image">
-                        财政照片
+                        <div class="circle-avatar">蔡</div>
                     </div>
                     <div class="team-info">
                         <h3 class="heading-medium">蔡静铱 财政</h3>
