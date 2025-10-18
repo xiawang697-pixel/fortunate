@@ -126,14 +126,48 @@
             color: #e67e23;
         }
         
-        /* 英雄区域样式 */
+        /* 英雄区域样式 - 新增轮播图样式 */
         .hero-section {
             padding: 100px 0;
-            background-color: #f8f8f8;
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://picsum.photos/id/20/1920/1080');
+            position: relative;
+            overflow: hidden;
+            height: 600px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
         }
         
         .hero-content {
@@ -142,6 +176,8 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
         }
         
         /* 关于我们样式 */
@@ -334,7 +370,8 @@
             }
             
             .hero-section {
-                background-attachment: scroll;
+                height: auto;
+                padding: 60px 0;
             }
         }
     </style>
@@ -353,8 +390,22 @@
         </div>
     </header>
 
-    <!-- 英雄区域 -->
+    <!-- 英雄区域 - 新增轮播图结构 -->
     <section class="hero-section">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('https://picsum.photos/id/20/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://picsum.photos/id/1071/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://picsum.photos/id/42/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://picsum.photos/id/60/1920/1080');">
+                <div class="slide-overlay"></div>
+            </div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="heading-xlarge">请支持二号内阁！</h1>
@@ -364,13 +415,13 @@
         </div>
     </section>
 
-    <!-- 关于我们 -->
+    <!-- 关于我们 - 修改"香港学子"为"学子" -->
     <section id="about" class="about-section">
         <div class="container about-container">
             <div class="about-text">
                 <div class="rich-text-block">
                     <h2 class="heading-large">赋能学子，塑造未来</h2>
-                    <p><span class="highlight">Fortunate</span> 致力于通过为香港学子提供卓越服务来塑造未来。我们深谙当代学子面临的独特挑战与机遇，矢志支持他们的学业与个人成长。团队满怀热忱，致力于营造培育型环境，让学子在此茁壮成长、汲取知识、为成功未来做好准备。<span class="highlight">选择福运</span>，您将获得全程无忧的指导与支持。</p>
+                    <p><span class="highlight">Fortunate</span> 致力于通过为学子提供卓越服务来塑造未来。我们深谙当代学子面临的独特挑战与机遇，矢志支持他们的学业与个人成长。团队满怀热忱，致力于营造培育型环境，让学子在此茁壮成长、汲取知识、为成功未来做好准备。<span class="highlight">选择福运</span>，您将获得全程无忧的指导与支持。</p>
                 </div>
             </div>
             <div class="about-image">
@@ -401,7 +452,7 @@
         </div>
     </section>
 
-    <!-- 核心成员 -->
+    <!-- 核心成员 - 修改"财政"为"财政成员" -->
     <section id="team" class="team-section">
         <div class="container">
             <div class="section-title">
@@ -429,10 +480,10 @@
                 </div>
                 <div class="team-card">
                     <div class="team-image">
-                        <img src="https://picsum.photos/id/66/300/300" alt="蔡静铱 财政" class="member-avatar" title="蔡静铱 财政">
+                        <img src="https://picsum.photos/id/66/300/300" alt="蔡静铱 财政成员" class="member-avatar" title="蔡静铱 财政成员">
                     </div>
                     <div class="team-info">
-                        <h3 class="heading-medium">蔡静铱 财政</h3>
+                        <h3 class="heading-medium">蔡静铱 财政成员</h3>
                         <p class="body-normal">负责学生会财务预算、经费管理和报销工作，秉持公正透明原则，确保每一笔资金都能合理运用到学生服务中。</p>
                     </div>
                 </div>
@@ -471,5 +522,23 @@
             <p style="margin-top: 10px;">选择二号内阁 - 这将是你最正确的选择之一。</p>
         </div>
     </footer>
+
+    <!-- 轮播图动态切换脚本 -->
+    <script>
+        // 获取轮播图元素
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const slideInterval = 5000; // 切换间隔时间（毫秒）
+        
+        // 切换轮播图函数
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        // 设置自动轮播
+        setInterval(nextSlide, slideInterval);
+    </script>
 </body>
 </html>
