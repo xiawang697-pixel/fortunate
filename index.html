@@ -452,19 +452,43 @@
         .button {
             display: inline-block;
             padding: 12px 24px;
-            background-color: transparent;
-            border: 2px solid #000000;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 0, 0, 0.3);
             color: #000000;
             text-decoration: none;
             font-weight: 500;
             border-radius: 8px;
             transition: all 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .button:hover {
-            background-color: #000000;
+            background-color: rgba(0, 0, 0, 0.8);
             color: #ffffff;
+            border-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* 深色模式下的按钮样式式 */
+        .dark-mode .button {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            background-color: rgba(52, 152, 219, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+        }
+        
+        .dark-mode .button:hover {
+            background-color: rgba(52, 152, 219, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
         }
         
         /* 头部样式 */
@@ -478,6 +502,13 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 深色模式下的头部样式 */
+        .dark-mode header {
+            background-color: rgba(26, 26, 46, 0.8);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .header-container {
@@ -500,6 +531,11 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: #000000;
+        }
+        
+        /* 深色模式下的Logo文本样式 */
+        .dark-mode .logo-text {
+            color: #ffffff;
         }
         
         /* 导航菜单样式 */
@@ -535,7 +571,12 @@
             width: 100%;
         }
         
-        /* 汉堡菜单样式 */
+        /* 深色模式下的导航菜单样式 */
+        .dark-mode .nav-menu a {
+            color: #ffffff;
+        }
+        
+        /* 汉堡菜单菜单样式 */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -551,6 +592,11 @@
             transition: all 0.3s ease;
         }
         
+        /* 深色模式下的汉堡菜单菜单样式 */
+        .dark-mode .bar {
+            background-color: #ffffff;
+        }
+        
         .bar.active:nth-child(1) {
             transform: translateY(7px) rotate(45deg);
         }
@@ -563,7 +609,7 @@
             transform: translateY(-7px) rotate(-45deg);
         }
         
-        /* 下拉菜单样式 */
+        /* 下拉菜单菜单样式 */
         .dropdown-menu {
             position: fixed;
             top: 0;
@@ -611,6 +657,16 @@
             padding-left: 10px;
         }
         
+        /* 深色模式下的下拉菜单样式 */
+        .dark-mode .dropdown-menu {
+            background-color: rgba(26, 26, 46, 0.95);
+        }
+        
+        .dark-mode .dropdown-menu a {
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         /* 英雄区域样式 */
         .hero-section {
             position: relative;
@@ -641,6 +697,20 @@
             font-size: 1.5rem;
             margin-bottom: 2rem;
             color: #333333;
+        }
+        
+        /* 深色模式下的英雄区域样式 */
+        .dark-mode .hero-section {
+            background-color: #1a1a2e;
+        }
+        
+        .dark-mode .hero-title {
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .dark-mode .hero-subtitle {
+            color: #e0e0e0;
         }
         
         .hero-buttons {
@@ -1182,6 +1252,69 @@
             top: 0;
             left: 0;
             z-index: 1;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+        
+        /* 深色模式下的梦幻粒子背景 */
+        .dark-mode #particles-js {
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        /* 自定义粒子效果样式 */
+        .dream-particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+            animation: dreamParticle 2s ease-out forwards;
+        }
+        
+        @keyframes dreamParticle {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty));
+            }
+        }
+        
+        .dream-light {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+            animation: dreamLight 3s ease-out forwards;
+        }
+        
+        @keyframes dreamLight {
+            0% {
+                opacity: 1;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+        
+        /* 深色模式下的梦幻粒子效果 */
+        .dark-mode .dream-particle {
+            background-color: rgba(52, 152, 219, 0.7);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+        
+        .dark-mode .dream-light {
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, rgba(52, 152, 219, 0) 70%);
         }
     </style>
 </head>
@@ -1938,13 +2071,41 @@
             const savedMode = localStorage.getItem('darkMode');
             
             // 设置初始模式
-            if (savedMode === 'enabled' || (!savedMode && prefersDarkMode)) {
-                document.body.classList.add('dark-mode');
-                darkModeIcon.classList.remove('fa-moon-o');
-                darkModeIcon.classList.add('fa-sun-o');
-                mobileModeIcon.classList.remove('fa-moon-o');
-                mobileModeIcon.classList.add('fa-sun-o');
+            function setInitialMode() {
+                if (savedMode === 'enabled' || (!savedMode && prefersDarkMode)) {
+                    document.body.classList.add('dark-mode');
+                    darkModeIcon.classList.remove('fa-moon-o');
+                    darkModeIcon.classList.add('fa-sun-o');
+                    mobileModeIcon.classList.remove('fa-moon-o');
+                    mobileModeIcon.classList.add('fa-sun-o');
+                }
             }
+            
+            // 初始化模式
+            setInitialMode();
+            
+            // 监听系统主题变化
+            function handleSystemThemeChange(e) {
+                // 只有在用户没有手动设置过主题的情况下才跟随系统变化
+                if (!savedMode) {
+                    if (e.matches) {
+                        document.body.classList.add('dark-mode');
+                        darkModeIcon.classList.remove('fa-moon-o');
+                        darkModeIcon.classList.add('fa-sun-o');
+                        mobileModeIcon.classList.remove('fa-moon-o');
+                        mobileModeIcon.classList.add('fa-sun-o');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                        darkModeIcon.classList.remove('fa-sun-o');
+                        darkModeIcon.classList.add('fa-moon-o');
+                        mobileModeIcon.classList.remove('fa-sun-o');
+                        mobileModeIcon.classList.add('fa-moon-o');
+                    }
+                }
+            }
+            
+            // 添加系统主题变化监听
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleSystemThemeChange);
             
             // 切换深色模式
             function toggleDarkMode() {
