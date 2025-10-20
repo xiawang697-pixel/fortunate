@@ -1965,13 +1965,16 @@
                     const particle = document.createElement('div');
                     particle.className = 'dream-particle';
                     
-                    // 随机颜色
-                    const colors = [
-                        '#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f', 
-                        '#e74c3c', '#1abc9c', '#34495e', '#9b59b6', '#f39c12'
-                    ];
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    particle.style.backgroundColor = color;
+                    // 根据当前主题选择颜色
+                    if (!document.body.classList.contains('dark-mode')) {
+                        // 浅色模式使用随机颜色
+                        const colors = [
+                            '#e67e23', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f', 
+                            '#e74c3c', '#1abc9c', '#34495e', '#9b59b6', '#f39c12'
+                        ];
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        particle.style.backgroundColor = color;
+                    }
                     
                     // 随机大小
                     const size = 3 + Math.random() * 5;
@@ -2063,21 +2066,28 @@
             // 深色模式切换功能
             const darkModeToggle = document.getElementById('darkModeToggle');
             const mobileDarkModeToggle = document.getElementById('mobileDarkModeToggle');
-            const darkModeIcon = darkModeToggle.querySelector('i');
-            const mobileModeIcon = mobileDarkModeToggle.querySelector('i');
+            const darkModeIcon = darkModeToggle ? darkModeToggle.querySelector('i') : null;
+            const mobileModeIcon = mobileDarkModeToggle ? mobileDarkModeToggle.querySelector('i') : null;
             
             // 检查用户偏好和本地存储
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const prefersQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const prefersDarkMode = prefersQuery.matches;
             const savedMode = localStorage.getItem('darkMode');
             
             // 设置初始模式
             function setInitialMode() {
-                if (savedMode === 'enabled' || (!savedMode && prefersDarkMode)) {
-                    document.body.classList.add('dark-mode');
-                    darkModeIcon.classList.remove('fa-moon-o');
-                    darkModeIcon.classList.add('fa-sun-o');
-                    mobileModeIcon.classList.remove('fa-moon-o');
-                    mobileModeIcon.classList.add('fa-sun-o');
+                if (darkModeIcon && mobileModeIcon) {
+                    if (savedMode === 'enabled' || (!savedMode && prefersDarkMode)) {
+                        document.body.classList.add('dark-mode');
+                        darkModeIcon.classList.remove('fa-moon-o');
+                        darkModeIcon.classList.add('fa-sun-o');
+                        mobileModeIcon.classList.remove('fa-moon-o');
+                        mobileModeIcon.classList.add('fa-sun-o');
+                    }
+                }
+                // 无论初始模式如何，都重新初始化粒子效果
+                if (typeof initParticles === 'function') {
+                    initParticles();
                 }
             }
             
@@ -2086,29 +2096,42 @@
             
             // 监听系统主题变化
             function handleSystemThemeChange(e) {
-                // 只有在用户没有手动设置过主题的情况下才跟随系统变化
-                if (!savedMode) {
+                if (darkModeIcon && mobileModeIcon) {
+                    // 无论用户是否手动设置过主题，都更新UI以反映系统主题
                     if (e.matches) {
                         document.body.classList.add('dark-mode');
                         darkModeIcon.classList.remove('fa-moon-o');
                         darkModeIcon.classList.add('fa-sun-o');
                         mobileModeIcon.classList.remove('fa-moon-o');
                         mobileModeIcon.classList.add('fa-sun-o');
+                        localStorage.setItem('darkMode', 'enabled');
                     } else {
                         document.body.classList.remove('dark-mode');
                         darkModeIcon.classList.remove('fa-sun-o');
                         darkModeIcon.classList.add('fa-moon-o');
                         mobileModeIcon.classList.remove('fa-sun-o');
                         mobileModeIcon.classList.add('fa-moon-o');
+                        localStorage.setItem('darkMode', 'disabled');
                     }
+                }
+                
+                // 主题变化时重新初始化粒子效果
+                if (typeof initParticles === 'function') {
+                    initParticles();
                 }
             }
             
             // 添加系统主题变化监听
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleSystemThemeChange);
+            prefersQuery.addEventListener('change', handleSystemThemeChange);
             
             // 切换深色模式
             function toggleDarkMode() {
+                // 确保DOM元素已加载
+                if (!darkModeIcon || !mobileModeIcon) {
+                    console.error('深色模式切换图标未找到');
+                    return;
+                }
+                
                 document.body.classList.toggle('dark-mode');
                 
                 if (document.body.classList.contains('dark-mode')) {
@@ -2124,34 +2147,49 @@
                     mobileModeIcon.classList.add('fa-moon-o');
                     localStorage.setItem('darkMode', 'disabled');
                 }
+                
+                // 主题变化时重新初始化粒子效果
+                if (typeof initParticles === 'function') {
+                    initParticles();
+                }
+                
+                console.log('深色模式切换成功');
             }
             
-            darkModeToggle.addEventListener('click', function() {
-                toggleDarkMode();
-                
-                // 添加加点击动画效果
-                this.classList.add('quick-bounce');
-                setTimeout(() => {
-                    this.classList.remove('quick-bounce');
-                }, 300);
-            });
-            
-            mobileDarkModeToggle.addEventListener('click', function() {
-                toggleDarkMode();
-                
-                // 添加点击动画效果
-                this.classList.add('quick-bounce');
-                setTimeout(() => {
-                    this.classList.remove('quick-bounce');
-                }, 300);
-                
-                // 关闭下拉菜单
-                dropdownMenu.classList.remove('active');
-                const bars = menuToggle.querySelectorAll('.bar');
-                bars.forEach(bar => {
-                    bar.classList.remove('active');
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', function() {
+                    toggleDarkMode();
+                    
+                    // 添加加点击动画效果
+                    this.classList.add('quick-bounce');
+                    setTimeout(() => {
+                        this.classList.remove('quick-bounce');
+                    }, 300);
                 });
-            });
+            }
+            
+            if (mobileDarkModeToggle) {
+                mobileDarkModeToggle.addEventListener('click', function() {
+                    toggleDarkMode();
+                    
+                    // 添加点击动画效果
+                    this.classList.add('quick-bounce');
+                    setTimeout(() => {
+                        this.classList.remove('quick-bounce');
+                    }, 300);
+                    
+                    // 关闭下拉菜单
+                    const dropdownMenu = document.getElementById('dropdownMenu');
+                    const menuToggle = document.getElementById('menuToggle');
+                    if (dropdownMenu && menuToggle) {
+                        dropdownMenu.classList.remove('active');
+                        const bars = menuToggle.querySelectorAll('.bar');
+                        bars.forEach(bar => {
+                            bar.classList.remove('active');
+                        });
+                    }
+                });
+            }
             
             
             
