@@ -1,0 +1,286 @@
+/* 返回顶部按钮样式 */
+.back-to-top-button {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    outline: none;
+}
+
+.back-to-top-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.back-to-top-button.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 深色模式切换按钮样式 */
+.dark-mode-toggle {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* 导航栏中的深色模式切换按钮 */
+.dark-mode-toggle.nav-toggle {
+    color: #000000;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle.nav-toggle:hover {
+    color: #e67e23;
+    transform: scale(1.1);
+}
+
+/* 移动端下拉菜单中的深色模式切换按钮 */
+.dark-mode-toggle.mobile-toggle {
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    font-size: 1.5rem;
+    padding: 10px 0;
+    color: #000000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dark-mode-toggle.mobile-toggle:hover {
+    color: #e67e23;
+    padding-left: 10px;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(230, 126, 35, 0.5);
+}
+
+/* 桌面端适配 */
+@media (min-width: 768px) {
+    .back-to-top-button {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        right: 30px;
+        bottom: 30px;
+    }
+}
+
+/* 深色模式样式 */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #f8f8f8;
+    --card-bg: #1e1e1e;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+body.dark-mode .team-card,
+body.dark-mode .benefit-card,
+body.dark-mode .event-card {
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+}
+
+body.dark-mode .team-info h3,
+body.dark-mode .benefit-title,
+body.dark-mode .event-title,
+body.dark-mode .department-title,
+body.dark-mode .counter-text,
+body.dark-mode .carousel-caption h3 {
+    color: var(--text-color);
+}
+
+body.dark-mode .team-info p,
+body.dark-mode .benefit-desc,
+body.dark-mode .event-desc,
+body.dark-mode .counter-desc,
+body.dark-mode .carousel-caption p {
+    color: #e0e0e0;
+}
+
+body.dark-mode footer {
+    background-color: #1e1e1e;
+    color: #f8f8f8;
+}
+
+body.dark-mode .about-section,
+body.dark-mode .benefits-section,
+body.dark-mode .activities-section,
+body.dark-mode .contact-section {
+    background-color: var(--bg-color);
+}
+
+body.dark-mode .about-section .section-title p,
+body.dark-mode .benefits-section .section-title p,
+body.dark-mode .activities-section .section-title p,
+body.dark-mode .contact-section .section-title p {
+    color: #e0e0e0;
+}
+
+body.dark-mode .about-content .bg-white,
+body.dark-mode .benefits-section .bg-white,
+body.dark-mode .activities-section .bg-white,
+body.dark-mode .contact-section .bg-white {
+    background-color: var(--card-bg) !important;
+    color: #e0e0e0;
+}
+
+body.dark-mode .about-content .bg-white h4,
+body.dark-mode .benefits-section .bg-white h3,
+body.dark-mode .activities-section .bg-white h3,
+body.dark-mode .contact-section .bg-white h3 {
+    color: var(--text-color);
+}
+
+body.dark-mode .qrcode-text {
+    color: #e0e0e0;
+}
+
+/* 核心成员板块深色模式适配 */
+body.dark-mode .team-section {
+    background: linear-gradient(to bottom right, #1a1a1a, #2d2d2d);
+}
+
+body.dark-mode .team-card {
+    background-color: var(--card-bg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .team-card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .department-title {
+    color: var(--text-color);
+}
+
+body.dark-mode .team-info p {
+    color: #e0e0e0;
+}
+
+/* 导航栏深色模式适配 */
+body.dark-mode header {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .logo-text {
+    color: #000000;
+}
+
+body.dark-mode .nav-menu a {
+    color: #000000;
+}
+
+body.dark-mode .bar {
+    background-color: #000000;
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+body.dark-mode .dropdown-menu a {
+    color: #f8f8f8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .dropdowndown-menu a:hover {
+    color: #e67e23;
+}
+
+body.dark-mode .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .qrcode-container {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .qrcode-title {
+    color: #f8f8f8;
+}
+
+body.dark-mode .qrcode-item {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .qrcode-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .qrcode-item span {
+    color: #f8f8f8;
+}
+
+body.dark-mode .back-to-top-button {
+    background-color: #34495e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .dark-mode-toggle.nav-toggle {
+    color: #000000;
+}
+
+body.dark-mode .dark-mode-toggle.nav-toggle:hover {
+    color: #e67e23;
+}
+
+body.dark-mode .dark-mode-toggle.mobile-toggle {
+    color: #f8f8f8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+body.dark-mode .dark-mode-toggle.mobile-toggle i {
+    color: #f39c12; /* 黄色 */
+}
+
+body.dark-mode .dark-mode-toggle.mobile-toggle:hover {
+    color: #e67e23;
+}
+
+body.dark-mode .support-button {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .support-button:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}

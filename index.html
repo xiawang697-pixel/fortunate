@@ -14,6 +14,7 @@
     
     <!-- 自定义样式 -->
     <link href="style.css" rel="stylesheet">
+    <link href="custom_style.css" rel="stylesheet">
     
     <!-- 自定义Tailwindwind配置 -->
     <script>
@@ -486,7 +487,9 @@
         
         /* 头部样式 */
         header {
-            background-color: #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: #000000;
             padding: 15px 0;
             position: sticky;
@@ -1094,9 +1097,7 @@
             transition: all 0.3s ease;
         }
         
-        footer:hover {
-            background-color: #2c3e50;
-        }
+
         
         .footer-bounce {
             animation: bottom-bounce 0.6s ease-out;
@@ -1177,7 +1178,7 @@
     <div class="dream-effect" id="dreamEffect"></div>
     
     <!-- 毛玻璃小球返回顶部按钮 -->
-    <button id="backToTopButtonRight" class="back-to-top-button fixed bottom-8 right-8 z-50 flex items-center justify-center">
+    <button id="backToTopButton" class="back-to-top-button">
         <i class="fa fa-arrow-up"></i>
     </button>
     
@@ -1188,7 +1189,7 @@
                 <span class="logo-text">Fortunate</span>
             </div>
             
-            <!-- 桌面导航菜单 -->
+            <!-- 导航菜单 -->
             <nav class="desktop-nav">
                 <ul class="nav-menu">
                     <li><a href="#home">首页</a></li>
@@ -1196,6 +1197,11 @@
                     <li><a href="#benefits">福利介绍</a></li>
                     <li><a href="#activities">计划活动</a></li>
                     <li><a href="#team">核心成员</a></li>
+                    <li class="mode-toggle-container">
+                        <button id="darkModeToggle" class="dark-mode-toggle nav-toggle" style="position: relative; width: auto; height: auto; background-color: transparent; box-shadow: none; border: none; font-size: 1.2rem; padding: 5px 10px; margin-left: 10px;">
+                            <i class="fa fa-moon-o"></i>
+                        </button>
+                    </li>
                 </ul>
             </nav>
             
@@ -1215,6 +1221,11 @@
                 <li><a href="#benefits">福利介绍</a></li>
                 <li><a href="#activities">计划活动</a></li>
                 <li><a href="#team">核心成员</a></li>
+                <li>
+                    <button id="mobileDarkModeToggle" class="dark-mode-toggle mobile-toggle" style="width: 100%; text-align: left; background-color: transparent; box-shadow: none; border: none; font-size: 1.5rem; padding: 10px 0; color: #000000;">
+                        <i class="fa fa-moon-o mr-2"></i>
+                    </button>
+                </li>
             </ul>
         </div>
     </header>
@@ -1444,7 +1455,7 @@
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image p-8 flex justify-center relative bg-gradient-to-br from-primary/10 to-primary/5">
                             <!-- 会长照片 -->
-                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/a792ee571a0747ae9fb294530ed8115e~tplv-a9rns2rl98-image.image?rcl=202510192001338D4CD4C7949E8035974B&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1763467353&amp;x-signature=1hkmAjF36es8x2D0ZvtmX5mToAE%3D" alt="越迪文 会长" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-primary shadow-md" title="越迪文 会长">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/a792ee571a0747ae9fb294530ed8115e~tplv-a9rns2rl98-image.image?rcl=202510192001338D4CD4C7949E8035974B&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1763467353&amp;x-signature=1hkmAjF36es8x2D0ZvtmX5mToAE%3D" alt="越迪文 会长" class="member-avatar w-64 h-64 object-cover rounded-full border-4 border-primary shadow-md" title="越迪文 会长" style="border: 1px solid rgba(0, 0, 0, 0.15); border-radius: 0px;">
                             
                             <!-- 主席头像圆形样式 -->
                             <div class="relative"></div>
@@ -1465,7 +1476,7 @@
                 <div class="team-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-secondary/10 to-secondary/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/93/300/300" alt="张瑞婕 外务副会长" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-secondary shadow-md" title="张瑞婕 外务副会长">
+                            <img src="https://picsum.photos/id/93/300/300" alt="张瑞婕 外务副会长" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-secondary shadow-md" title="张瑞婕 外务副会长">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">张瑞婕 <span class="text-secondary text-lg">（外务副会长）</span></h3>
@@ -1475,7 +1486,7 @@
                     
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-secondary/10 to-secondary/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/91/300/300" alt="沈子晴 外务副会长" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-secondary shadow-md" title="沈子晴 外务副会长">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/67553c95eb4b4de895436c80a6e619f5~tplv-a9rns2rl98-image.image?rcl=20251019230856B117A17D447C595179B9&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1761491339&amp;x-signature=ywsI92ehq%2Bey3kdF8NMR4skWC%2BU%3D" alt="沈子晴 外务副会长" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-secondary shadow-md" title="沈子晴 外务副会长">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">沈子晴 <span class="text-secondary text-lg">（外务副会长）</span></h3>
@@ -1485,7 +1496,7 @@
                     
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-secondary/10 to-secondary/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/92/300/300" alt="黄均勻 内务副会长" class="member-avatar w-48 h-48 object-cover rounded-full border border-4 border-secondary shadow-md" title="黄均勻 内务副会长">
+                            <img src="https://picsum.photos/id/92/300/300" alt="黄均勻 内务副会长" class="member-avatar w-56 h-56 object-cover rounded-full border border-4 border-secondary shadow-md" title="黄均勻 内务副会长">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">黃均勻 <span class="text-secondary text-lg">（內務副會長）</span></h3>
@@ -1535,7 +1546,7 @@
                     <!-- 康乐部 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/0e0d88b300a2484086693c56795ac27e~tplv-a9rns2rl98-image.image?rcl=202510191921531CC1639486C7C558209B&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1763464922&amp;x-signature=7EgVbUMWFusgWKHrLiKSYpC%2FThA%3D" alt="馬培元 康乐" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="馬培元 康乐">
+                            <img src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/0e0d88b300a2484086693c56795ac27e~tplv-a9rns2rl98-image.image?rcl=202510191921531CC1639486C7C558209B&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1763464922&amp;x-signature=7EgVbUMWFusgWKHrLiKSYpC%2FThA%3D" alt="馬培元 康乐" class="member-avatar w-64 h-64 object-cover rounded-full border-4 border-accent shadow-md" title="馬培元 康乐">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">馬培元 <span class="text-accent text-lg">（康乐）</span></h3>
@@ -1546,7 +1557,7 @@
                     <!-- 康乐部成员 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d73de63338ce428da1e3b1dbee6bd785~tplv-a9rns2rl98-image.image?rcl=202510192224536A214C40D4934E655EA2&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1763475944&amp;x-signature=aQkYhWLtZUKWHQVW63GJXtZhT6Q%3D" alt="童丽媛 康乐" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="童丽媛 康乐">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/d73de63338ce428da1e3b1dbee6bd785~tplv-a9rns2rl98-image.image?rcl=202510192224536A214C40D4934E655EA2&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1763475944&amp;x-signature=aQkYhWLtZUKWHQVW63GJXtZhT6Q%3D" alt="童丽媛 康乐" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="童丽媛 康乐">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">童丽媛 <span class="text-accent text-lg">（康乐）</span></h3>
@@ -1557,7 +1568,7 @@
                     <!-- 康乐部成员 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/106/300/300" alt="欧阳可津 康乐" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="欧阳可津 康乐">
+                            <img src="https://picsum.photos/id/106/300/300" alt="欧阳可津 康乐" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="欧阳可津 康乐">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">欧阳可津 <span class="text-accent text-lg">（康乐）</span></h3>
@@ -1579,7 +1590,7 @@
                     <!-- 宣传部 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/108/300/300" alt="何志毅 宣传" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="何志毅 宣传">
+                            <img src="https://picsum.photos/id/108/300/300" alt="何志毅 宣传" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="何志毅 宣传">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">何志毅 <span class="text-accent text-lg">（宣传）</span></h3>
@@ -1590,7 +1601,7 @@
                     <!-- 宣传部成员 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/109/300/300" alt="何颖宜 宣传" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="何颖宜 宣传">
+                            <img src="https://picsum.photos/id/109/300/300" alt="何颖宜 宣传" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="何颖宜 宣传">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">何颖宜 <span class="text-accent text-lg">（宣传）</span></h3>
@@ -1600,7 +1611,7 @@
                     
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/110/300/300" alt="魏嘉彤 宣传" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="魏嘉彤 宣传">
+                            <img src="https://picsum.photos/id/110/300/300" alt="魏嘉彤 宣传" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="魏嘉彤 宣传">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">魏嘉彤 <span class="text-accent text-lg">（宣传）</span></h3>
@@ -1611,7 +1622,7 @@
                     <!-- 总务部 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/111/300/300" alt="叶梓茵 总务" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="叶梓茵 总务">
+                            <img src="https://picsum.photos/id/111/300/300" alt="叶梓茵 总务" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="叶梓茵茵 总务">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">叶梓茵 <span class="text-accent text-lg">（总务）</span></h3>
@@ -1622,7 +1633,7 @@
                     <!-- 总务部成员 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/112/300/300" alt="駱思穎 总务" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="駱思穎 总务">
+                            <img src="https://picsum.photos/id/112/300/300" alt="駱思穎 总务" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="駱思穎 总务">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">駱思穎 <span class="text-accent text-lg">（总务）</span></h3>
@@ -1632,7 +1643,7 @@
                     
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/113/300/300" alt="鄭熙雯 总务" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="鄭熙雯 总务">
+                            <img src="https://picsum.photos/id/113/300/300" alt="鄭熙雯 总务" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="鄭熙雯 总务">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">鄭熙雯 <span class="text-accent text-lg">（总务）</span></h3>
@@ -1643,7 +1654,7 @@
                     <!-- 学术部 -->
                     <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="team-image bg-gradient-to-br from-accent/10 to-accent/5 p-8 flex justify-center">
-                            <img src="https://picsum.photos/id/114/300/300" alt="黄铮仪 学术" class="member-avatar w-48 h-48 object-cover rounded-full border-4 border-accent shadow-md" title="黄铮仪 学术">
+                            <img src="https://picsum.photos/id/114/300/300" alt="黄铮仪 学术" class="member-avatar w-56 h-56 object-cover rounded-full border-4 border-accent shadow-md" title="黄铮仪 学术">
                         </div>
                         <div class="team-info p-6">
                             <h3 class="heading-medium text-xl font-bold text-gray-800 mb-2">黄铮仪 <span class="text-accent text-lg">（学术）</span></h3>
@@ -1710,16 +1721,18 @@
     </section>
 
     <!-- 返回顶部按钮 -->
-    <button id="backToTopButton" class="back-to-top-button">
+    <button id="backToTopButtonRight" class="back-to-top-button" style="position: fixed; bottom: 120px; right: 20px; width: 70px; height: 70px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: var(--primary-color); display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); font-size: 28px; border: 1px solid rgba(255, 255, 255, 0.4); outline: none;">
         <i class="fa fa-arrow-up"></i>
     </button>
+    
+    
     
     <!-- 页脚 -->
     <footer id="footer">
         <div class="container">
             <p>© 2025 Fortunate 学生会. 版权所有.</p>
             <p style="margin-top: 10px;">选择二号内阁 - 这将是你最正确的选择之一。</p>
-            <p style="margin-top: 10px; font-size: 0.8em; color: #666;">GitHub: <a href="https://github.com/xiawang697-pixel/fortunate" class="text-primary hover:underline">xiawang697-pixel/fortunate</a></p>
+            <p style="margin-top: 10px; font-size: 0.8em; color: #666;">GitHub - xiawang697-pixel/fortunate</p>
         </div>
     </footer>
 
@@ -1901,45 +1914,110 @@
             });
             
             // 返回顶部按钮功能
-            const backToTopButton = document.getElementById('backToTopButton');
             const backToTopButtonRight = document.getElementById('backToTopButtonRight');
             
-            // 滚动事件监听
-            window.addEventListener('scroll', function() {
-                // 当页面滚动超过500px时显示返回顶部按钮
-                if (window.pageYOffset > 500) {
-                    backToTopButton.classList.add('active');
-                    backToTopButtonRight.classList.add('active');
-                } else {
-                    backToTopButton.classList.remove('active');
-                    backToTopButtonRight.classList.remove('active');
-                }
-            });
+            // 深色模式切换功能
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const mobileDarkModeToggle = document.getElementById('mobileDarkModeToggle');
+            const darkModeIcon = darkModeToggle.querySelector('i');
+            const mobileModeIcon = mobileDarkModeToggle.querySelector('i');
             
-            // 滚动到顶部函数
-            function scrollToTop() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+            // 检查用户偏好和本地存储
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedMode = localStorage.getItem('darkMode');
+            
+            // 设置初始模式
+            if (savedMode === 'enabled' || (!savedMode && prefersDarkMode)) {
+                document.body.classList.add('dark-mode');
+                darkModeIcon.classList.remove('fa-moon-o');
+                darkModeIcon.classList.add('fa-sun-o');
+                mobileModeIcon.classList.remove('fa-moon-o');
+                mobileModeIcon.classList.add('fa-sun-o');
             }
             
-            // 左侧返回顶部按钮点击事件
-            backToTopButton.addEventListener('click', function() {
-                scrollToTop();
+            // 切换深色模式
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
                 
-                // 添加按钮点击动画
+                if (document.body.classList.contains('dark-mode')) {
+                    darkModeIcon.classList.remove('fa-moon-o');
+                    darkModeIcon.classList.add('fa-sun-o');
+                    mobileModeIcon.classList.remove('fa-moon-o');
+                    mobileModeIcon.classList.add('fa-sun-o');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    darkModeIcon.classList.remove('fa-sun-o');
+                    darkModeIcon.classList.add('fa-moon-o');
+                    mobileModeIcon.classList.remove('fa-sun-o');
+                    mobileModeIcon.classList.add('fa-moon-o');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            }
+            
+            darkModeToggle.addEventListener('click', function() {
+                toggleDarkMode();
+                
+                // 添加加点击动画效果
+                this.classList.add('quick-bounce');
+                setTimeout(() => {
+                    this.classList.remove('quick-bounce');
+                }, 300);
+            });
+            
+            mobileDarkModeToggle.addEventListener('click', function() {
+                toggleDarkMode();
+                
+                // 添加点击动画效果
                 this.classList.add('quick-bounce');
                 setTimeout(() => {
                     this.classList.remove('quick-bounce');
                 }, 300);
                 
-                // 添加梦幻特效
-                createBaseDreamEffect(this);
+                // 关闭下拉菜单
+                dropdownMenu.classList.remove('active');
+                const bars = menuToggle.querySelectorAll('.bar');
+                bars.forEach(bar => {
+                    bar.classList.remove('active');
+                });
             });
             
-            // 右侧返回顶部按钮点击事件
-            backToTopButtonRight.addEventListener('click', function() {
+            
+            
+            // 滚动事件监听
+            function handleScroll() {
+                // 当页面滚动超过500px时显示返回顶部按钮
+                if (window.pageYOffset > 500) {
+                    backToTopButton.style.opacity = '1';
+                    backToTopButton.style.visibility = 'visible';
+                } else {
+                    backToTopButton.style.opacity = '0';
+                    backToTopButton.style.visibility = 'hidden';
+                }
+            }
+            
+            // 添加滚动事件监听
+            window.addEventListener('scroll', handleScroll);
+            
+            // 页面加载时检查一次滚动位置
+            window.addEventListener('load', handleScroll);
+            
+            // 滚动到顶部函数
+            function scrollToTop() {
+                // 平滑滚动到顶部
+                const scrollToTop = window.setInterval(function() {
+                    const position = window.pageYOffset;
+                    if (position > 0) {
+                        window.scrollTo(0, position - Math.max(20, Math.floor(position / 10)));
+                    } else {
+                        window.clearInterval(scrollToTop);
+                    }
+                }, 16);
+            }
+            
+
+            
+            // 返回顶部按钮点击事件
+            backToTopButton.addEventListener('click', function() {
                 scrollToTop();
                 
                 // 添加按钮点击动画
